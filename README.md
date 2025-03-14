@@ -3,12 +3,12 @@
 </p>
 
 # Documentazione Team Code Alchemists
-All'interno di questa repository GitHub è possibile trovare tutta la documentazione prodotta dal team "Code Alchemist", 21° gruppo.
+All'interno di questa repository GitHub è possibile trovare tutta la documentazione prodotta dal team <b>"Code Alchemist"</b>, 21° gruppo.
 
 Pagina di Visualizzazione: <a href="https://teamcodealchemists.github.io" target="_blank">Code Alchemists</a>
 
-Università degli Studi di Padova
-Dipartimento di Matematica
-Corso di Laurea in Informatica (L-31)
-Ingegneria del Software
-Anno Accademico: 2024/2025
+Università degli Studi di Padova<br>
+Dipartimento di Matematica<br>
+Corso di Laurea in Informatica (L-31)<br>
+Ingegneria del Software<br>
+Anno Accademico: 2024/2025<br>
