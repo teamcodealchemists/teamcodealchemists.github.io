@@ -45,7 +45,6 @@ main h2{
     background-color: var(--breadcolor);
     color: var(--breadwordcolor);
     padding: 0.5em;
-    border-top: 1px inset var(--bgcolor);
 }
 
 .navbar-brand{
