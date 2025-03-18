@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8" />
+	
+	<title> Code Alchemists </title>
+	<meta name = "description" content = "Questa è la pagina principale del Team Code Alchemists, per il progetto di SWE del corso di Informatica (L31) di UniPd" />
+	<meta name ="keywords" content ="Code, Alchemists, swe, progetto, git, team" />
+	<meta name="author" content="Nicolò Bolzon, Mattia Dalla Pozza, Sebastiano Marana, Nicholas Moretto, Matteo Pretto, Alex Shu, Stefano Speranza, Ramona Zangla"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./Assets/style.css" />
+
+	<link href='https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap' rel='stylesheet' />
+	<link rel="shortcut icon" type="image/png" href="./Assets/Loghi/Logo.png" media="screen" /> <!--icona visibile su browser-->
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <main>
+    <div id="container">
+        <nav class="header">
+            <div class="header_container">
+              <a class="navbar-brand" href="#">
+                <img src="./Assets/Loghi/Logo-nome.png" alt="Logo del gruppo" width="30" height="30" />
+                <span class="navTitle" style="margin-left: 15px">Code Alchemists</span>
+              </a>
+            </div>
+        </nav>
+        <div id="logo_container">
+            <img src="./Assets/Immagini/GraficaHome.png" alt="Logo del gruppo" id="logo" />
+        </div>
+
+        <div class="presentazione">
+            <h1>Benvenuti nel sito del Team Code Alchemists</h1>
+            <p>Siamo il gruppo 21 di Ingegneria del Software del corso di Informatica (L-31) all'Università degli Studi di Padova, noto come Code Alchemists.</p>
+        </div>
+        
+
+        <div class="card-container">
+            <!--
+            <div class="card" onclick="toggleDropdown(1)">
+                <h3>PB</h3>
+                <div class="dropdown" id="dropdown-1">
+                    <a href="documento1.pdf">Documento 1</a>
+                    <a href="documento2.pdf">Documento 2</a>
+                </div>
+            </div>
+    
+            <div class="card" onclick="toggleDropdown(2)">
+                <h3>RTB</h3>
+                <div class="dropdown" id="dropdown-2">
+                    <a href="immagine1.jpg">Immagine 1</a>
+                    <a href="immagine2.jpg">Immagine 2</a>
+                </div>
+            </div>
+            -->
+    
+            <div class="card" onclick="toggleDropdown(3)">
+                <h3>Candidatura</h3>
+                <div class="dropdown" id="dropdown-3">
+                    <a href="script.js">Script JS</a> <!--da inserire riferimento a documento su github-->
+                    <a href="stile.css">Foglio CSS</a>
+                </div>
+            </div>
+    
+            <div class="card" onclick="toggleDropdown(4)">
+                <h3>Diapositive</h3>
+                <div class="dropdown" id="dropdown-4">
+                    <a href="altro1.txt">Altro 1</a>
+                    <a href="altro2.txt">Altro 2</a>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            function toggleDropdown(cardNumber) {
+                let dropdowns = document.querySelectorAll('.dropdown');
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.id !== `dropdown-${cardNumber}`) {
+                        dropdown.classList.remove('open');
+                        dropdown.style.maxHeight = "0px";
+                        dropdown.style.padding = "0";
+                    }
+                });
+
+                // Alterna la visibilità della tendina selezionata
+                let dropdown = document.getElementById(`dropdown-${cardNumber}`);
+                if (dropdown.classList.contains('open')) {
+                    dropdown.classList.remove('open');
+                    dropdown.style.maxHeight = "0px";
+                    dropdown.style.padding = "0";
+                } else {
+                    dropdown.classList.add('open');
+                    dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+                    dropdown.style.padding = "10px"; // Riapplica il padding quando la tendina è aperta
+                }
+            }
+        </script>
+
+		</main>
+	</div>
+    <footer>
+        <div class="contatti">
+            <h3>Come contattarci</h3>  
+            <ul>
+                <li><span lang="en">E-mail</span>: <a href="mailto:team.codealchemists@gmail.com">team.codealchemists@gmail.com</a></li>
+                </ul>
+        </div>
+    <p>
+        <span class="copyright"><span lang="en">Copyright &copy; </span>  2025 by Code Alchemists - All Rights Reserved</span>
+    </p>
+    </footer>
+</body>
+</html>
