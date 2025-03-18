@@ -7,5 +7,7 @@
 			"path": "../.github"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "teamcodealchemists.github.io"
+	}
 }
