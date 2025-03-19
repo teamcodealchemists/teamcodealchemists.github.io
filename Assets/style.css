@@ -1,179 +1,187 @@
-*{
+/* Cayman Theme Inspired Styles */
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-:root{                      /*cambiare qui i colori e utilizzare le variabili*/
-    --bgcolor: #b5f5ff;
-    --breadcolor: #9e9e9e;
-    --linkbreadcolor: #ffffff;
+:root {
+    --primary-color: #2a7ae2;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --header-background: linear-gradient(135deg, #2a7ae2, #6a0dad);
+    --header-text: #fff;
+    --footer-background: linear-gradient(135deg, #2a7ae2, #6a0dad);
+    --footer-text: #fff;
+    --card-background: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
 }
 
-html{
-    background-color: var(--bgcolor);
-}
-
-html, body{
-    width: 100%;
+html {
+    background-color: var(--background-color);
     font-family: "Josefin Sans", sans-serif;
-    font-size: 1em;
-    font-weight: 300;   /*100=light, 400=normal, 700=bold*/
-    color: var(--txtcolor);
-    margin:auto;
-    display:flex;
+    color: var(--text-color);
+}
+
+body {
+    width: 100%;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
-body{
-    border: 1px solid black;
-}
-
-main{
+main {
     flex: 1;
-    position:relative;
-    z-index:2;
-    min-height: 80vh;
+    width: 100%;
+    max-width: 100%;
 }
 
-main h2{
-    text-align: center;
-    padding: 20px;
-    font-size: 2em;
+/* Header */
+.header_container {
+    background: var(--header-background);
+    color: var(--header-text);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.header_container{
-    background-color: var(--breadcolor);
-    color: var(--breadwordcolor);
-    padding: 0.5em;
-}
-
-.navbar-brand{
+.navbar-brand {
     text-decoration: none;
-}
-
-.navTitle{
+    color: var(--header-text);
     font-size: 1.5em;
-    font-weight: 700;
-    color: var(--linkbreadcolor);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
-#logo_container{
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+/* Logo Container */
+#logo_container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 0.5em;
+    margin: 20px 0;
 }
 
 #logo {
-    width: 60%; /* Imposta la larghezza del logo */
-    height: auto; /* Assicura che #logo si ridimensioni in altezza */
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7); /* Aggiungi un bordo sfocato */
-    transition: box-shadow 0.3s ease-in-out; /* Aggiungi una transizione per l'effetto */
+    width: 60%;
+    max-width: 500px;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px var(--card-shadow);
 }
 
-.presentazione{
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+/* Presentation Section */
+.presentazione {
     text-align: center;
+    margin-bottom: 30px;
 }
 
-.presentazione p{
+.presentazione h1 {
+    font-size: 2em;
+    color: var(--primary-color);
+}
+
+.presentazione p {
     font-size: 1.2em;
-    padding-top:0.5%;
+    color: var(--text-color);
 }
 
+/* Card Styles */
 .card-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     gap: 30px;
-    flex-wrap: wrap;
-    padding-top: 2%;
-    padding-bottom: 3%;
+    padding: 20px 0;
 }
 
 .card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;
+    background: var(--card-background);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px var(--card-shadow);
+    width: 300px;
     cursor: pointer;
-    transition: box-shadow 0.3s;
+    text-align: center;
+    transition: transform 0.2s;
 }
 
 .card:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
 }
 
+.card h3 {
+    color: var(--primary-color);
+    font-size: 1.5em;
+}
+
+/* Dropdown */
 .dropdown {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+    transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out; 
     padding: 0;
 }
 
-/* Quando attivo, aumenta l'altezza */
 .dropdown.open {
-    max-height: 200px; /* Un valore abbastanza grande per contenere i link */
-    padding: 10px; /* Riapplica il padding */
+    padding: 10px;
 }
 
 .dropdown a {
     display: block;
     text-decoration: none;
-    color: black;
-    padding: 5px;
+    color: var(--text-color);
+    padding: 8px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    height: auto; /* Consente l'espansione automatica */
+    line-height: 1.2; /*Imposta l'altezza della linea per garantire spazio sufficiente */
+    word-break:break-word;
 }
 
 .dropdown a:hover {
-    background: #bbb;
+    background: #ddd;
 }
 
+.dropdown h4{
+    padding-top: 20px;
+}
 
-/*
-======================================
-                FOOTER
-======================================
-*/
+/* Footer */
 footer {
-    color: var(--breadwordcolor);
-    background-color: var(--breadcolor);
-    border-bottom: 0;
-}
-
-footer h2{
-    margin-left: 0%;
-    margin-bottom: 4px;
+    background: var(--footer-background);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    margin-top: auto;
 }
 
 footer .contatti {
-    text-align: center;
-    padding-top: 1%;
-    padding-bottom: 0.5%;
     font-size: 1.2em;
+    margin-bottom: 10px;
 }
 
-footer p{                /*p: paragrafo*/   
-    display: flex;
-    font-style: italic;
-    font-size: 1em;
-    gap:0;
-    justify-content: center;
-    padding-bottom:0.3%;
+footer a {
+    color: var(--footer-text);
+    text-decoration: underline;
 }
 
 footer li{
     list-style-type: none;
 }
 
-.imgValidCode{
-    width: 80px;
-}  
-
-.copyright{
-    padding-top:1%;
-    padding-left: 1%;
-    padding-right: 1%;
+.copyright {
+    font-size: 0.9em;
 }
