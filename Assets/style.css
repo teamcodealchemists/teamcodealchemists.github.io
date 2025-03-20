@@ -10,14 +10,15 @@
     --primary-color: #2a7ae2;
     --background-color: #f5f5f5;
     --text-color: #333;
-    --header-background: linear-gradient(135deg, #2a7ae2, #6a0dad);
+    --header-background: linear-gradient(135deg, #41a3ef, #7c81ff);
     --header-text: #fff;
-    --footer-background: linear-gradient(135deg, #2a7ae2, #6a0dad);
+    --footer-background: linear-gradient(135deg, #41a3ef, #7c81ff);
     --footer-text: #fff;
     --card-background: #ffffff;
     --card-shadow: rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
 }
+/*linear-gradient(135deg, #2a7ae2, #6a0dad); colore sfumatura precendente*/
 
 html {
     background-color: var(--background-color);
