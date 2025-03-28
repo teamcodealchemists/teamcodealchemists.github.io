@@ -94,14 +94,13 @@ main {
 #logo_container {
     position: relative;
     background-image: url('./Immagini/TorreArchimede.jpg');
-    background-size: 100% 80%;
-    background-position: center top; 
     background-size: cover; 
     background-position: center; 
     width: 100%;
     height: 31.25em; 
     overflow: hidden; 
     transition: all 0.5s ease-in-out;
+    clip-path: inset(0 0 50px 0);
 }
 
 #logo_container::before {
@@ -111,7 +110,7 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('./Assets/Immagini/TorreArchimede.jpg');
+    background-image: url('./Immagini/TorreArchimede.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(8px);
