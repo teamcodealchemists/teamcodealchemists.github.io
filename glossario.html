@@ -20,7 +20,6 @@
 
 <body>
     <main>
-    <!-- <div id="container"> -->
         <nav class="header">
             <div class="header_container">
               <a class="navbar-brand" href="index.html">
@@ -29,7 +28,6 @@
               </a>
                <div class="github-button">
                 <a href="./index.html" class="github-btn">Torna alla Home</a>
-                <!-- <a href="https://github.com/teamcodealchemists" target="_blank" class="github-btn" title="Visita il proflo GitHub del gruppo">GitHub Page</a> -->
               </div>
             </div>
             
@@ -175,8 +173,6 @@
                 <p>Contenuto per la lettera Z...</p>
             </div>
         </div>
-        
-    <!-- </div> -->
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -188,68 +184,109 @@
             
             // Calcola l'altezza della barra delle lettere
             const letterListHeight = letterList.offsetHeight;  
+
+            let isScrolling = false;
             
             function onScroll() {
+                if (isScrolling) return; // Evita di eseguire più volte la funzione durante lo scroll
+
                 const headerHeight = header.offsetHeight;
                 const titleHeight = title.offsetHeight;
                 const scrollPosition = window.scrollY;
-    
-                // if (scrollPosition >= headerHeight + titleHeight) {
-                //     letterList.classList.add('fixed');
-                // } else {
-                //     letterList.classList.remove('fixed');
-                // }
-    
-                // let currentSection = '';
-                // sections.forEach(section => {
-                //     const sectionTop = section.offsetTop - letterListHeight + 20; // Adjust the offset as needed
-                //     if (window.scrollY >= sectionTop) {
-                //         currentSection = section.getAttribute('id');
-                //     }
-                // });
+                const tolerance = 5; // Margine di tolleranza per i confini
 
-                if (scrollPosition >= headerHeight + titleHeight) {
+                if (scrollPosition >= headerHeight) {
                 letterList.classList.add('fixed');
                 } else {
                     letterList.classList.remove('fixed');
                 }
 
                 let currentSection = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - letterListHeight + 20; // Aggiungi un margine extra per evitare errori
+                let foundSection = false; // Flag per evitare aggiornamenti multipli
+
+                sections.forEach((section, index) => {
+                    if (foundSection) return; // Interrompe il ciclo se la sezione è già stata trovata
+
+                    const sectionTop = section.offsetTop - letterListHeight - 20; // Compensa l'altezza della barra delle lettere
                     const sectionBottom = sectionTop + section.offsetHeight; // Calcola il fondo della sezione
+
+                    // Se lo scroll è dentro questa sezione, selezionala
                     if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                         currentSection = section.getAttribute('id');
+                        foundSection = true; // Imposta il flag per evitare ulteriori aggiornamenti
+                    }
+
+                    // Gestisce il caso in cui lo scroll è vicino al confine inferiore
+                    if (!foundSection && Math.abs(scrollPosition - sectionBottom) <= tolerance && index < sections.length - 1) {
+                        currentSection = sections[index + 1].getAttribute('id');
+                        foundSection = true; // Imposta il flag per evitare ulteriori aggiornamenti
                     }
                 });
     
                 links.forEach(link => {
+                    const linkTarget = link.getAttribute('href').substring(1);
                     link.classList.remove('selected');
-                    if (link.getAttribute('href').substring(1) === currentSection) {
+                    if (linkTarget === currentSection) {
                         link.classList.add('selected');
                     }
                 });
             }
 
             function onClick(event) {
-            event.preventDefault();
-            const targetId = event.currentTarget.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            const offset = targetSection.offsetTop - letterListHeight + 20; // Adjust the offset as needed
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth' // Smooth scrolling animation
-            });
-            // Forza l'aggiornamento della selezione
-            links.forEach(link => link.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-        }
+                event.preventDefault();
+                isScrolling = true; // Imposta il flag per evitare lo scroll multiplo
+
+                const headerHeight = header.offsetHeight;
+                const targetId = event.currentTarget.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                let offset = targetSection.offsetTop - letterListHeight - 10; // Adjust the offset as needed
+                
+                // Se la barra delle lettere non è ancora fissa, aggiungi l'altezza della barra
+                if (window.scrollY < header.offsetHeight) {
+                    offset -= letterListHeight + 20;
+                }
+                // Assicurati che l'offset non sia negativo
+                offset = Math.max(offset, 0);
+
+                // Aggiorna immediatamente la sezione corrente
+                currentSection = targetId;
+                // Aggiorna la classe 'selected' per i link
+                links.forEach(link => {
+                    const linkTarget = link.getAttribute('href').substring(1);
+                    link.classList.remove('selected');
+                    if (linkTarget === currentSection) {
+                        link.classList.add('selected');
+                    }
+                });
+
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+
+                // Aggiorna la barra delle lettere durante lo scroll animato
+                const checkFixedInterval = setInterval(() => {
+                    const scrollPosition = window.scrollY;
+                    if (scrollPosition >= headerHeight) {
+                        letterList.classList.add('fixed');
+                    } else {
+                        letterList.classList.remove('fixed');
+                    }
+                }, 50); // Controlla ogni 50ms
+
+                // Reimposta il flag e ferma l'aggiornamento dopo lo scroll animato
+                setTimeout(() => {
+                    isScrolling = false;
+                    clearInterval(checkFixedInterval); // Ferma l'intervallo
+                }, 500); // Durata dello scroll animato
+            }
     
             window.addEventListener('scroll', onScroll);
             links.forEach(link => {
                 link.addEventListener('click', onClick);
             });
-            
+
+            onScroll(); // Aggiorna la selezione iniziale
         });
     </script>
     <footer>

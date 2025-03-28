@@ -257,21 +257,21 @@ main {
 }
 
 .letter-sections{
-    /* padding-top: 60px; */
+    margin-top:60px;
     margin-left: 10%;
     margin-right: 10%;
 }
 
 .letter-section {
-    padding-top: 10px; /* Aggiungi un padding superiore per evitare che il contenuto venga nascosto dalla letter-list */
-   /* Compensa il padding superiore per mantenere la posizione corretta */
-    padding-left: 20px; /* Aggiungi un padding a sinistra per allineare le lettere */
+    padding: 20px; /* Aggiungi un padding a sinistra per allineare le lettere */
+    min-height: 100px;
 }
 
 .letter-section h2 {
     text-align: left;
     font-size: 2em; /* Dimensione del carattere per le lettere */
     margin-bottom: 20px; /* Spazio sotto le lettere */
+    margin-top: -20px;
     padding-left: 10%; /* Aggiungi un padding a sinistra per allineare le lettere */
 }
 
