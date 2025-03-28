@@ -109,7 +109,7 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('./Immagini/TorreArchimede.jpg');
+    background-image: url('https://raw.githubusercontent.com/teamcodealchemists/teamcodealchemists.github.io/main/Assets/Immagini/TorreArchimede.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(8px);
