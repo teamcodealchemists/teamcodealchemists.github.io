@@ -10,7 +10,7 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="./Assets/style.css" />
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap' rel='stylesheet' />
 	<link rel="shortcut icon" type="image/png" href="./Assets/Loghi/Logo.svg" media="screen" /> <!--icona visibile su browser-->
 	
@@ -23,141 +23,176 @@
     <!-- <div id="container"> -->
         <nav class="header">
             <div class="header_container">
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="#membri">
                 <img src="./Assets/Loghi/Logo.png" alt="Logo del gruppo" width="30" height="30" />
                 <span class="navTitle" style="margin-left: 15px">Code Alchemists</span>
               </a>
               <div class="github-button">
-                <a href="https://github.com/teamcodealchemists" target="_blank" title="Visita il proflo GitHub del gruppo">
-                    <button class="github-btn">GitHub Page</button>
+                <a href="https://github.com/teamcodealchemists" target="_blank" title="Team CodeAlchemists Github">
+                    <i class="fab fa-github github-icon"></i> <!-- Icona GitHub -->
                 </a>
             </div>
             </div>
-            
-                    
         </nav>
         <div id="logo_container">
-            <img src="./Assets/Immagini/GraficaHome.png" alt="Logo del gruppo" id="logo" />
-        </div>
-
+            <!--<img src="./Assets/Immagini/TorreArchimede.jpg" alt="Logo del gruppo" id="logo" />-->
+            <h1 class="titolocentrato">Team CodeAlchemists</h1>
+            <h2 class="motivoAzienda">Turning ideas into code, like magic</h2>
+        </div>     
         <div class="presentazione">
-            <h2>Il nostro team</h2>
-            <p>Siamo il <b>Team Code Alchemists</b>, 21° gruppo di Ingegneria del Software del Corso di Laurea in Informatica (L-31) dell'Università degli Studi di Padova.</p>
+            <h2 class="titolo">Documentazione</h2>
         </div>
-        
-        <div class="membri">
-            <div class="member-container">
-            <div class="member">
-                <a href="https://github.com/nicolobolzon" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/nicolobolzon.png" alt="Foto Profilo di Nicolò Bolzon">
-                <p>Nicolò Bolzon</p>
-                </a>
-            </div>
-            <div class="member">
-                <a href="https://github.com/mkwukong" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/mkwukong.png" alt="Foto Profilo di Mattia Dalla Pozza">
-                <p>Mattia Dalla Pozza</p>
-                </a>
-            </div>
-            <div class="member">
-                <a href="https://github.com/sebamarana" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/sebamarana.png" alt="Foto Profilo di Sebastiano Marana">
-                <p>Sebastiano Marana</p>
-                </a>
-            </div>
-            <div class="member">
-                <a href="https://github.com/nicmoro31" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/nicmoro31.png" alt="Foto Profilo di Nicholas Moretto">
-                <p>Nicholas Moretto</p>
-                </a>
-            </div>
-            <div class="member">
-                <a href="https://github.com/matteopretto" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/matteopretto.png" alt="Foto Profilo di Matteo Pretto">
-                <p>Matteo Pretto</p>
-                </a>
-            </div>
-            <div class="member">
-                <a href="https://github.com/IwantBeRich" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/IwantBeRich.png" alt="Foto Profilo di Alex Shu">
-                <p>Alex Shu</p>
-                </a>
-            </div>
-            <div class="member">
-                <a href="https://github.com/ssperanz" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/ssperanz.png" alt="Foto Profilo di Stefano Speranza">
-                <p>Stefano Speranza</p>
-                </a>
-            </div>
-            <div class="member">
-                <a href="https://github.com/ShizuIT" target="_blank" title="Visita il proflo GitHub">
-                <img src="https://github.com/ShizuIT.png" alt="Foto Profilo di Ramona Zangla">
-                <p>Ramona Zangla</p>
-                </a>
-            </div>
-            </div>
-        </div>        
-        <h2>Documentazione</h2>
         <div class="card-container">
             
-            <!--
             <div class="card" onclick="toggleDropdown(1)">
                 <h3>PB</h3>
                 <div class="dropdown" id="dropdown-1">
-                    <a href="documento1.pdf">Documento 1</a>
-                    <a href="documento2.pdf">Documento 2</a>
+                    <a href="documento1.pdf" target="_blank">Documento 1</a>
+                    <a href="documento2.pdf" target="_blank">Documento 2</a>
                 </div>
             </div>
     
             <div class="card" onclick="toggleDropdown(2)">
                 <h3>RTB</h3>
                 <div class="dropdown" id="dropdown-2">
-                    <a href="immagine1.jpg">Immagine 1</a>
-                    <a href="immagine2.jpg">Immagine 2</a>
+                    <a href="immagine1.jpg" target="_blank">Immagine 1</a>
+                    <a href="immagine2.jpg" target="_blank">Immagine 2</a>
                 </div>
             </div>
-            -->
     
             <div class="card" onclick="toggleDropdown(3)">
                 <h3>Candidatura</h3>
                 <div class="dropdown" id="dropdown-3"> <!--da inserire riferimento a documento su github-->
                     <h4>Files Candidatura:</h4>
-                        <a href="./documents/01_Candidatura/Files_Candidatura/Lettera_di_Candidatura.pdf">Lettera di Candidatura</a>
-                        <a href="./documents/01_Candidatura/Files_Candidatura/Valutazione_dei_Capitolati_1.0.0.pdf">Valutazione dei Capitolati 1.0.0</a>
-                        <a href="./documents/01_Candidatura/Files_Candidatura/Dichiarazione_Impegni_1.0.0.pdf">Dichiarazione Impegni 1.0.0</a>
+                        <a href="./documents/01_Candidatura/Files_Candidatura/Lettera_di_Candidatura.pdf" target="_blank">Lettera di Candidatura</a>
+                        <a href="./documents/01_Candidatura/Files_Candidatura/Valutazione_dei_Capitolati_1.0.0.pdf" target="_blank">Valutazione dei Capitolati 1.0.0</a>
+                        <a href="./documents/01_Candidatura/Files_Candidatura/Dichiarazione_Impegni_1.0.0.pdf" target="_blank">Dichiarazione Impegni 1.0.0</a>
                     <h4>Verbali Interni:</h4>
-                        <a href="./documents/01_Candidatura/Verbali_Interni/2025-03-18 VI 1.0.0.pdf">2025-03-18 VI 1.0.0</a> 
-                        <a href="./documents/01_Candidatura/Verbali_Interni/2025-03-10 VI 1.0.0.pdf">2025-03-10 VI 1.0.0</a>
-                        <a href="./documents/01_Candidatura/Verbali_Interni/2025-03-06 VI 1.0.0.pdf">2025-03-06 VI 1.0.0</a> 
+                        <a href="./documents/01_Candidatura/Verbali_Interni/2025-03-18 VI 1.0.0.pdf" target="_blank">2025-03-18 VI 1.0.0</a> 
+                        <a href="./documents/01_Candidatura/Verbali_Interni/2025-03-10 VI 1.0.0.pdf" target="_blank">2025-03-10 VI 1.0.0</a>
+                        <a href="./documents/01_Candidatura/Verbali_Interni/2025-03-06 VI 1.0.0.pdf" target="_blank">2025-03-06 VI 1.0.0</a> 
                     <h4>Verbali Esterni:</h4>
-                        <a href="./documents/01_Candidatura/Verbali_Esterni/2025-03-17 VE 2.0.0 (VarGroup).pdf">2025-03-17 VE 2.0.0 (VarGroup)</a>
-                        <a href="./documents/01_Candidatura/Verbali_Esterni/2025-03-14 VE 2.0.0 (M31).pdf">2025-03-14 VE 2.0.0 (M31)</a> 
-                        <a href="./documents/01_Candidatura/Verbali_Esterni/2025-03-13 VE 2.0.0 (SyncLab).pdf">2025-03-13 VE 2.0.0 (SyncLab)</a>
+                        <a href="./documents/01_Candidatura/Verbali_Esterni/2025-03-17 VE 2.0.0 (VarGroup).pdf" target="_blank">2025-03-17 VE 2.0.0 (VarGroup)</a>
+                        <a href="./documents/01_Candidatura/Verbali_Esterni/2025-03-14 VE 2.0.0 (M31).pdf" target="_blank">2025-03-14 VE 2.0.0 (M31)</a> 
+                        <a href="./documents/01_Candidatura/Verbali_Esterni/2025-03-13 VE 2.0.0 (SyncLab).pdf" target="_blank">2025-03-13 VE 2.0.0 (SyncLab)</a>
                 </div>
             </div>
-            <!--
             <div class="card" onclick="toggleDropdown(4)">
                 <h3>Diapositive</h3>
                 <div class="dropdown" id="dropdown-4">
-                    <a href="altro1.txt">Altro 1</a>
-                    <a href="altro2.txt">Altro 2</a>
+                    <a href="altro1.txt" target="_blank">Altro 1</a>
+                    <a href="altro2.txt" target="_blank">Altro 2</a>
                 </div>
             </div>
-            -->
         </div>
     
+        <div class="presentazione">
+            <h2 class="titolo">Il nostro team</h2>
+            <p>Siamo il <b>Team Code Alchemists</b>, 21° gruppo di Ingegneria del Software del Corso di Laurea in Informatica (L-31) dell'Università degli Studi di Padova.</p>
+        </div>
+        
+        <div class="membri" id="membri">
+            <div class="member-container-wrapper">
+                <button class="scroll-btn left" id="scroll-left">&#10094;</button>
+                <div class="member-container">
+                    <div class="member">
+                        <a href="https://github.com/nicolobolzon" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/nicolobolzon.png" alt="Foto Profilo di Nicolò Bolzon">
+                            <p>Nicolò Bolzon</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> nicolo.bolzon@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong>  da compilare </p>
+                                <p><strong>Descrizione:</strong> da compilare</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="member">
+                        <a href="https://github.com/IwantBeRich" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/IwantBeRich.png" alt="Foto Profilo di Alex Shu">
+                            <p>Alex Shu</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> alex.shu@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong> shualexwork@gmail.com</p>
+                                <p><strong>Descrizione:</strong> Studente del terzo anno UniPd </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="member">
+                        <a href="https://github.com/mkwukong" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/mkwukong.png" alt="Foto Profilo di Mattia Dalla Pozza">
+                            <p>Mattia Dalla Pozza</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> mattia.dallapozza@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong>  da compilare</p>
+                                <p><strong>Descrizione:</strong>  da compilare</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="member">
+                        <a href="https://github.com/sebamarana" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/sebamarana.png" alt="Foto Profilo di Sebastiano Marana">
+                            <p>Sebastiano Marana</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> sebastiano.marana@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong>  da compilare</p>
+                                <p><strong>Descrizione:</strong>  da compilare</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="member">
+                        <a href="https://github.com/nicmoro31" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/nicmoro31.png" alt="Foto Profilo di Nicholas Moretto">
+                            <p>Nicholas Moretto</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> nicholas.moretto@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong>  da compilare</p>
+                                <p><strong>Descrizione:</strong>  da compilare</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="member">
+                        <a href="https://github.com/matteopretto" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/matteopretto.png" alt="Foto Profilo di Matteo Pretto">
+                            <p>Matteo Pretto</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> matteo.pretto@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong>  da compilare</p>
+                                <p><strong>Descrizione:</strong>  da compilare</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="member">
+                        <a href="https://github.com/ssperanz" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/ssperanz.png" alt="Foto Profilo di Stefano Speranza">
+                            <p>Stefano Speranza</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> stefano.speranza@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong>  da compilare</p>
+                                <p><strong>Descrizione:</strong>  da compilare</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="member">
+                        <a href="https://github.com/ShizuIT" target="_blank" title="Visita il profilo GitHub">
+                            <img src="https://github.com/ShizuIT.png" alt="Foto Profilo di Ramona Zangla">
+                            <p>Ramona Zangla</p>
+                            <div class="contact-info">
+                                <p><strong>Email Universitaria:</strong> ramona.zangla@studenti.unipd.it</p>
+                                <p><strong>Email Lavoro:</strong> da compilare</p>
+                                <p><strong>Descrizione:</strong>  da compilare</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <button class="scroll-btn right" id="scroll-right">&#10095;</button>
+            </div>
+        </div>
+        
         <script>
             function toggleDropdown(cardNumber) {
-                let dropdowns = document.querySelectorAll('.dropdown');
-                dropdowns.forEach(dropdown => {
-                    if (dropdown.id !== `dropdown-${cardNumber}`) {
-                        dropdown.classList.remove('open');
-                        dropdown.style.maxHeight = "0px";
-                        dropdown.style.padding = "0";
-                    }
-                });
-
-                // Alterna la visibilità della tendina selezionata
+                if (event.target.tagName === 'A') {
+                    return; 
+                }
                 let dropdown = document.getElementById(`dropdown-${cardNumber}`);
                 if (dropdown.classList.contains('open')) {
                     dropdown.classList.remove('open');
@@ -166,10 +201,47 @@
                 } else {
                     dropdown.classList.add('open');
                     dropdown.style.maxHeight = dropdown.scrollHeight + "px";
-                    dropdown.style.padding = "10px"; // Riapplica il padding quando la tendina è aperta
+                    dropdown.style.padding = "10px";
                 }
             }
-        </script>
+            window.onload = function() {
+                let dropdowns = document.querySelectorAll('.dropdown');
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.add('open');
+                    dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+                    dropdown.style.padding = "10px";
+                });
+            };
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const scrollContainer = document.querySelector(".member-container");
+                const leftButton = document.getElementById("scroll-left");
+                const rightButton = document.getElementById("scroll-right");
+            
+                function updateButtons() {
+                    leftButton.style.display = scrollContainer.scrollLeft > 0 ? "block" : "none";
+                    rightButton.style.display =
+                        scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth ? "block" : "none";
+                }
+            
+                leftButton.addEventListener("click", function () {
+                    scrollContainer.scrollBy({
+                        left: -432, 
+                        behavior: "smooth",
+                    });
+                });
+            
+                rightButton.addEventListener("click", function () {
+                    scrollContainer.scrollBy({
+                        left: 432, 
+                        behavior: "smooth",
+                    });
+                });
+            
+                scrollContainer.addEventListener("scroll", updateButtons);
+                updateButtons(); 
+            });
+        </script>       
     <!-- </div> -->
     </main>
     <footer>
