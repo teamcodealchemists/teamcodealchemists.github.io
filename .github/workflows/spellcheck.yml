@@ -38,8 +38,12 @@ jobs:
       # 5. Esegui LanguageTool sui file .txt
       - name: Esegui LanguageTool
         run: |
-          for file in ./documents/txt/*.txt; do
-            java -jar LanguageTool-*/languagetool-commandline.jar \
-              --language it-IT "$file"
-          done
+          if ls ./documents/txt/*.txt 1> /dev/null 2>&1; then
+            for file in ./documents/txt/*.txt; do
+              java -jar LanguageTool-*/languagetool-commandline.jar \
+                --language it-IT "$file"
+            done
+          else
+            echo "No .txt files found in ./documents/txt/"
+          fi
 
