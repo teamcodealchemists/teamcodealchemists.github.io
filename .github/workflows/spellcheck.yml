@@ -7,27 +7,38 @@ on: [push]
   #    - 'documents/**/*.pdf'
 
 jobs:
-  spellcheck:
+  grammar_check:
     runs-on: ubuntu-latest
     steps:
+      # 1. Checkout del codice
       - name: Checkout del codice
         uses: actions/checkout@v2
 
+      # 2. Installa i pacchetti necessari (poppler-utils per pdftotext)
       - name: Installa pdftotext
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
 
+      # 3. Estrai testo dai PDF
       - name: Estrai testo dai PDF
         run: |
-            find ./documents -name "*.pdf" | while IFS= read -r file; do
-              pdftotext "$file" "${file%.pdf}.txt"
-            done
+          mkdir -p ./documents/txt
+          for file in $(find ./documents -name "*.pdf"); do
+            filename=$(basename "$file" .pdf)
+            dir=$(dirname "$file")
+            pdftotext "$file" "$dir/txt/$filename.txt"
+          done
 
-      - name: Esegui LanguageTool con reviewdog
-        uses: reviewdog/action-languagetool@v1.22.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          language: 'it-IT'
-          patterns: '**/*.txt'
-          level: 'warning'
-          reporter: 'github-pr-review'
+      # 4. Scarica LanguageTool
+      - name: Scarica LanguageTool
+        run: |
+          wget https://languagetool.org/download/LanguageTool-stable.zip
+          unzip LanguageTool-stable.zip
+
+      # 5. Esegui LanguageTool sui file .txt
+      - name: Esegui LanguageTool
+        run: |
+          for file in ./documents/txt/*.txt; do
+            java -jar LanguageTool-*/languagetool-commandline.jar \
+              --language it-IT "$file"
+          done
 
