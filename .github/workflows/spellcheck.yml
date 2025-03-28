@@ -25,6 +25,7 @@ jobs:
           find ./documents -name "*.pdf" | while IFS= read -r file; do
             filename=$(basename "$file" .pdf)
             dir=$(dirname "$file")
+            mkdir -p "$dir/txt"
             pdftotext "$file" "$dir/txt/$filename.txt"
           done
 
