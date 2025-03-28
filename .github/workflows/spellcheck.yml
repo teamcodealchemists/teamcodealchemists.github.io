@@ -12,11 +12,16 @@ jobs:
     steps:
       - name: Checkout del codice
         uses: actions/checkout@v2
+
+      - name: Installa pdftotext
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
       - name: Estrai testo dai PDF
         run: |
             for file in $(find ./documents -name "*.pdf"); do
                 pdftotext "$file" "${file%.pdf}.txt"
             done
+
       - name: Esegui LanguageTool con reviewdog
         uses: reviewdog/action-languagetool@v1.22.0
         with:
