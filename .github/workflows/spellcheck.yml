@@ -22,7 +22,7 @@ jobs:
       - name: Estrai testo dai PDF
         run: |
           mkdir -p ./documents/txt
-          for file in $(find ./documents -name "*.pdf"); do
+          find ./documents -name "*.pdf" | while IFS= read -r file; do
             filename=$(basename "$file" .pdf)
             dir=$(dirname "$file")
             pdftotext "$file" "$dir/txt/$filename.txt"
