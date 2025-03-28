@@ -266,7 +266,7 @@ main {
     gap: 2em;
     padding: 0 10px;
     scroll-behavior: smooth; 
-    overflow-x: hidden;
+    overflow-x: auto;
     flex-wrap: nowrap;
     -ms-overflow-style: none;  
     scrollbar-width: none;  
