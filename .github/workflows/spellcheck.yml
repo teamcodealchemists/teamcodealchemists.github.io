@@ -26,7 +26,7 @@ jobs:
             filename=$(basename "$file" .pdf)
             dir=$(dirname "$file")
             mkdir -p "$dir/txt"
-            pdftotext "$file" "$dir/txt/$filename.txt"
+            pdftotext "$file" "./documents/txt/$filename.txt"
           done
 
       # 4. Scarica LanguageTool
@@ -38,7 +38,7 @@ jobs:
       # 5. Esegui LanguageTool sui file .txt
       - name: Esegui LanguageTool
         run: |
-          if ls ./documents/txt/*.txt 1> /dev/null 2>&1; then
+          if [ "$(find ./documents/txt -type f -name '*.txt')" ]; then
             for file in ./documents/txt/*.txt; do
               java -jar LanguageTool-*/languagetool-commandline.jar \
                 --language it-IT "$file"
