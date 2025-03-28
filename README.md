@@ -1,3 +1,5 @@
+[![Controllo Ortografico Documentazione](https://github.com/teamcodealchemists/teamcodealchemists.github.io/actions/workflows/spellcheck.yml/badge.svg)](https://github.com/teamcodealchemists/teamcodealchemists.github.io/actions/workflows/spellcheck.yml)
+
 <p align="center">
   <img alt="Logo del Team: una provetta di laboratorio chimico racchiusa dentro a due parentesi angolari, rappresentanti i tag di programmazione. Sotto il nome del team e il motto: Code Alchemists. Turning ideas into code, like magic" src="Assets/Loghi/Logo-nome-motto.png" width="30%">
 </p>
