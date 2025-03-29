@@ -28,4 +28,6 @@ jobs:
       - name: Converti testo in HTML
         run: |
           mkdir -p .
-          pandoc ./documents/txt/glossario.txt -o ./glossario.html
+          echo "<html><body>" > ./glossario.html
+          cat ./documents/txt/glossario.txt >> ./glossario.html
+          echo "</body></html>" >> ./glossario.html
