@@ -41,9 +41,12 @@ jobs:
           if [ "$(find ./documents/txt -type f -name '*.txt')" ]; then
             for file in ./documents/txt/*.txt; do
               java -jar LanguageTool-*/languagetool-commandline.jar \
-                --language it-IT "$file"
+                --language it-IT \
+                --rulefile ./custom_rules.xml \
+                "$file"
             done
           else
             echo "No .txt files found in ./documents/txt/"
           fi
 
+#TODO: Configura il file di configurazione per LanguageTool :)

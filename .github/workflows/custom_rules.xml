@@ -1,0 +1,7 @@
+<rule id="IGNORE_TERM" name="Ignora termine specifico">
+    <pattern>
+        <token>Alchemists</token>
+    </pattern>
+    <message>Ignorato: Alchemists</message>
+    <ignore>all</ignore>
+</rule>
