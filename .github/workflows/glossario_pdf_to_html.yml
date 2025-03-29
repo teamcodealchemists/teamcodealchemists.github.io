@@ -1,0 +1,31 @@
+name: Converti Glossario PDF to HTML
+
+on:
+    push:
+        paths:
+            - 'glossario/*.pdf'
+
+jobs:
+  convert_pdf_to_html:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del codice
+      - name: Checkout del codice
+        uses: actions/checkout@v2
+
+      # 2. Installa i pacchetti necessari (poppler-utils per pdftotext)
+      - name: Installa pdftotext
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      # 3. Estrai testo dai PDF
+      - name: Estrai testo dal PDF
+        run: |
+          mkdir -p ./documents/txt
+          pdftotext ./documents/glossario.pdf ./documents/txt/glossario.txt
+
+      # 4. Converti il testo in HTML
+      - name: Converti testo in HTML
+        run: |
+          mkdir -p .
+          pandoc ./documents/txt/glossario.txt -o ./glossario.html
