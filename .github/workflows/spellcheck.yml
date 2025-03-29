@@ -42,7 +42,7 @@ jobs:
             for file in ./documents/txt/*.txt; do
               java -jar LanguageTool-*/languagetool-commandline.jar \
                 --language it-IT \
-                --rulefile ./custom_rules.xml \
+                --rulefile .\.github\workflows\custom_rules.xml \
                 "$file"
             done
           else
