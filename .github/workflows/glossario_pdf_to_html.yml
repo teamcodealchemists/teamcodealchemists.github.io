@@ -1,9 +1,9 @@
 name: Converti Glossario PDF to HTML
 
-on:
-    push:
-        paths:
-            - 'glossario/*.pdf'
+on: [push]
+    #push:
+    #    paths:
+    #        - 'glossario/*.pdf'
 
 jobs:
   convert_pdf_to_html:
