@@ -31,3 +31,12 @@ jobs:
           echo "<html><body>" > ./glossario.html
           cat ./documents/txt/glossario.txt >> ./glossario.html
           echo "</body></html>" >> ./glossario.html
+
+      # 5. Commit e push del file HTML nella repo
+      - name: Commit e push del file HTML
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add glossario.html
+          git commit -m "Aggiorna glossario.html"
+          git push
