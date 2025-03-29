@@ -32,6 +32,9 @@ jobs:
           cat ./documents/txt/glossario.txt >> ./glossario.html
           echo "</body></html>" >> ./glossario.html
 
+        #TODO: Magari fare uno script python per convertire il testo in HTML
+        
+
       # 5. Commit e push del file HTML nella repo
       - name: Commit e push del file HTML
         run: |
