@@ -275,10 +275,23 @@ main {
     padding-left: 10%; /* Aggiungi un padding a sinistra per allineare le lettere */
 }
 
-.letter-section p {
+.letter-section .definizione{
     font-size: 1.2em; /* Dimensione del carattere per il contenuto */
-    margin-bottom: 10px; /* Spazio sotto ogni voce di glossario */
-    text-indent: 20%; /* Indenta il contenuto delle lettere */
+    margin-left: 20%;
+    margin-bottom: 5%;
+    margin-top: 1%;
+}
+
+.letter-section p b, .parola{
+    margin-left: 15%;
+    font-size: 1.5em;
+}
+
+.letter-section hr{
+    margin: 20px 0;
+    border: 1px solid;
+    border-image: linear-gradient(135deg, var(--primary-background), var(--secondary-background)) 1;
+    margin-left: 10%;
 }
 
 /* Footer */
