@@ -92,6 +92,30 @@ main {
     color: #ffffff;
 }
 
+.github-button{
+    margin-left: auto;
+}
+
+.github-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-right: 20px;
+}
+
+.github-btn:hover {
+    background-color: var(--secondary-color);
+}
+
 /* Logo Container */
 #logo_container {
     position: relative;
@@ -476,7 +500,7 @@ main {
 
 .letter-list.fixed {
     position: fixed;
-    top: 0;
+    top: 70px;
     z-index: 1000;
 }
 

@@ -258,7 +258,7 @@
 </div>
 
             </div>
-        </div>
+        <!-- </div> -->
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -272,16 +272,15 @@
             const letterListHeight = letterList.offsetHeight;  
 
             let isScrolling = false;
-            
             function onScroll() {
                 if (isScrolling) return; // Evita di eseguire più volte la funzione durante lo scroll
-                const headerHeight = header.offsetHeight;
+                const headerHeight = 100;
                 const titleHeight = title.offsetHeight;
                 const scrollPosition = window.scrollY;
                 const tolerance = 5; // Margine di tolleranza per i confini
 
                 if (scrollPosition >= headerHeight) {
-                letterList.classList.add('fixed');
+                    letterList.classList.add('fixed');
                 } else {
                     letterList.classList.remove('fixed');
                 }
@@ -321,7 +320,7 @@
                 event.preventDefault();
                 isScrolling = true; // Imposta il flag per evitare lo scroll multiplo
 
-                const headerHeight = header.offsetHeight;
+                const headerHeight = 100;
                 const targetId = event.currentTarget.getAttribute('href').substring(1);
                 const targetSection = document.getElementById(targetId);
                 let offset = targetSection.offsetTop - letterListHeight - 10; // Adjust the offset as needed
