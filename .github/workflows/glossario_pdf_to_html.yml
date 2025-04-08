@@ -3,7 +3,7 @@ name: Converti Glossario PDF a HTML
 on:
   push:
     branches:
-      - feature/SCRUM-55-Glossario-action
+      - main
     paths-ignore:
       - 'glossario.html'
   workflow_dispatch:
