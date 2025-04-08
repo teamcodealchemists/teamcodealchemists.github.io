@@ -1,4 +1,4 @@
-name: Converti Glossario PDF to HTML
+name: Converti Glossario PDF a HTML
 
 on:
   push:
