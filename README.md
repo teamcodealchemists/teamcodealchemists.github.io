@@ -12,3 +12,6 @@ Dipartimento di Matematica<br>
 Corso di Laurea in Informatica (L-31)<br>
 Ingegneria del Software<br>
 Anno Accademico: 2024/2025<br>
+
+## Glossario
+Per aggiornare il glossario basta semplicemente eseguire l'action manualmente o effettuare un push sulla branch main.
