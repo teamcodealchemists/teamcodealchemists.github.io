@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - feature/SCRUM-55-Glossario-action
+    paths-ignore:
+      - 'glossario.html'
   workflow_dispatch:
 
 permissions:
@@ -37,7 +39,7 @@ jobs:
 
       # Passaggio 6: Converte il testo in HTML
       - name: Converte il testo in HTML
-        run: uv run .github/workflows/glossario_convert.py && git diff --exit-code
+        run: uv run .github/workflows/glossario_convert.py
 
       # Passaggio 7: Effettua il commit e il push del file HTML nel repository
       - name: Commit e push del file HTML
