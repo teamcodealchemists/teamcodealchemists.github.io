@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="it">
+<head></head>
+	<meta charset="utf-8" />
+	
+	<title> Glossario - Code Alchemists </title>
+	<meta name = "description" content = "Questa è la pagina del glossario del Team Code Alchemists, contenente il glossario per la realizzazione del progetto." />
+	<meta name ="keywords" content ="Code, Alchemists, swe, progetto, git, team" />
+	<meta name="author" content="Nicolò Bolzon, Mattia Dalla Pozza, Sebastiano Marana, Nicholas Moretto, Matteo Pretto, Alex Shu, Stefano Speranza, Ramona Zangla"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./Assets/style.css" />
+
+	<link href='https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap' rel='stylesheet' />
+	<link rel="shortcut icon" type="image/png" href="./Assets/Loghi/Logo.svg" media="screen" /> <!--icona visibile su browser-->
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <main>
+        <nav class="header">
+            <div class="header_container">
+              <a class="navbar-brand" href="index.html">
+                <img src="./Assets/Loghi/Logo.png" alt="Logo del gruppo" width="30" height="30" />
+                <span class="navTitle" style="margin-left: 15px">Code Alchemists</span>
+              </a>
+               <div class="github-button">
+                <a href="./index.html" class="github-btn">Torna alla Home</a>
+              </div>
+            </div>
+            
+                    
+        </nav>
+
+        <h1>Glossario</h1>
+        
+        <div class="letter-list">
+            <!-- Genera la lista di lettere dalla A alla Z -->
+            <a href="#letter-A">A</a>
+            <a href="#letter-B">B</a>
+            <a href="#letter-C">C</a>
+            <a href="#letter-D">D</a>
+            <a href="#letter-E">E</a>
+            <a href="#letter-F">F</a>
+            <a href="#letter-G">G</a>
+            <a href="#letter-H">H</a>
+            <a href="#letter-I">I</a>
+            <a href="#letter-J">J</a>
+            <a href="#letter-K">K</a>
+            <a href="#letter-L">L</a>
+            <a href="#letter-M">M</a>
+            <a href="#letter-N">N</a>
+            <a href="#letter-O">O</a>
+            <a href="#letter-P">P</a>
+            <a href="#letter-Q">Q</a>
+            <a href="#letter-R">R</a>
+            <a href="#letter-S">S</a>
+            <a href="#letter-T">T</a>
+            <a href="#letter-U">U</a>
+            <a href="#letter-V">V</a>
+            <a href="#letter-W">W</a>
+            <a href="#letter-X">X</a>
+            <a href="#letter-Y">Y</a>
+            <a href="#letter-Z">Z</a>
+        </div>
+        
+        <div class="letter-sections">
+            <!-- Genera le sezioni per ogni lettera dalla A alla Z -->
+            {{glossario}}
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const letterList = document.querySelector('.letter-list');
+            const header = document.querySelector('.header');
+            const title = document.querySelector('h2');
+            const sections = document.querySelectorAll('.letter-section');
+            const links = document.querySelectorAll('.letter-list a');
+            
+            // Calcola l'altezza della barra delle lettere
+            const letterListHeight = letterList.offsetHeight;  
+
+            let isScrolling = false;
+            
+            function onScroll() {
+                if (isScrolling) return; // Evita di eseguire più volte la funzione durante lo scroll
+                const headerHeight = header.offsetHeight;
+                const titleHeight = title.offsetHeight;
+                const scrollPosition = window.scrollY;
+                const tolerance = 5; // Margine di tolleranza per i confini
+
+                if (scrollPosition >= headerHeight) {
+                letterList.classList.add('fixed');
+                } else {
+                    letterList.classList.remove('fixed');
+                }
+
+                let currentSection = '';
+                let foundSection = false; // Flag per evitare aggiornamenti multipli
+
+                sections.forEach((section, index) => {
+                    if (foundSection) return; // Interrompe il ciclo se la sezione è già stata trovata
+
+                    const sectionTop = section.offsetTop - letterListHeight - 20; // Compensa l'altezza della barra delle lettere
+                    const sectionBottom = sectionTop + section.offsetHeight; // Calcola il fondo della sezione
+
+                    // Se lo scroll è dentro questa sezione, selezionala
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSection = section.getAttribute('id');
+                        foundSection = true; // Imposta il flag per evitare ulteriori aggiornamenti
+                    }
+
+                    // Gestisce il caso in cui lo scroll è vicino al confine inferiore
+                    if (!foundSection && Math.abs(scrollPosition - sectionBottom) <= tolerance && index < sections.length - 1) {
+                        currentSection = sections[index + 1].getAttribute('id');
+                        foundSection = true; // Imposta il flag per evitare ulteriori aggiornamenti
+                    }
+                });
+    
+                links.forEach(link => {
+                    const linkTarget = link.getAttribute('href').substring(1);
+                    link.classList.remove('selected');
+                    if (linkTarget === currentSection) {
+                        link.classList.add('selected');
+                    }
+                });
+            }
+
+            function onClick(event) {
+                event.preventDefault();
+                isScrolling = true; // Imposta il flag per evitare lo scroll multiplo
+
+                const headerHeight = header.offsetHeight;
+                const targetId = event.currentTarget.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                let offset = targetSection.offsetTop - letterListHeight - 10; // Adjust the offset as needed
+                
+                // Se la barra delle lettere non è ancora fissa, aggiungi l'altezza della barra
+                if (window.scrollY < header.offsetHeight) {
+                    offset -= letterListHeight + 20;
+                }
+                // Assicurati che l'offset non sia negativo
+                offset = Math.max(offset, 0);
+
+                // Aggiorna immediatamente la sezione corrente
+                currentSection = targetId;
+                // Aggiorna la classe 'selected' per i link
+                links.forEach(link => {
+                    const linkTarget = link.getAttribute('href').substring(1);
+                    link.classList.remove('selected');
+                    if (linkTarget === currentSection) {
+                        link.classList.add('selected');
+                    }
+                });
+
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+
+                // Aggiorna la barra delle lettere durante lo scroll animato
+                const checkFixedInterval = setInterval(() => {
+                    const scrollPosition = window.scrollY;
+                    if (scrollPosition >= headerHeight) {
+                        letterList.classList.add('fixed');
+                    } else {
+                        letterList.classList.remove('fixed');
+                    }
+                }, 50); // Controlla ogni 50ms
+
+                // Reimposta il flag e ferma l'aggiornamento dopo lo scroll animato
+                setTimeout(() => {
+                    isScrolling = false;
+                    clearInterval(checkFixedInterval); // Ferma l'intervallo
+                }, 500); // Durata dello scroll animato
+            }
+    
+            window.addEventListener('scroll', onScroll);
+            links.forEach(link => {
+                link.addEventListener('click', onClick);
+            });
+
+            onScroll(); // Aggiorna la selezione iniziale
+        });
+    </script>
+    <footer>
+        <div class="contatti">
+            <h3>Come contattarci</h3>  
+            <ul>
+                <li><b><span lang="en">E-mail</span>: <a href="mailto:team.codealchemists@gmail.com">team.codealchemists@gmail.com</a></b></li>
+                </ul>
+        </div>
+    <p>
+        <span class="copyright"><span lang="en">Copyright &copy; </span>  2025 by Code Alchemists - All Rights Reserved</span>
+    </p>
+    </footer>
+</body>
+</html>
