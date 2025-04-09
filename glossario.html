@@ -274,8 +274,9 @@
             
             function onScroll() {
                 if (isScrolling) return; // Evita di eseguire più volte la funzione durante lo scroll
-                const headerHeight = header.offsetHeight;
+                const headerHeight = 100;
                 const titleHeight = title.offsetHeight;
+                console.log('Title Height:', titleHeight);
                 const scrollPosition = window.scrollY;
                 const tolerance = 5; // Margine di tolleranza per i confini
 
@@ -291,7 +292,7 @@
                 sections.forEach((section, index) => {
                     if (foundSection) return; // Interrompe il ciclo se la sezione è già stata trovata
 
-                    const sectionTop = section.offsetTop - letterListHeight - 20; // Compensa l'altezza della barra delle lettere
+                    const sectionTop = section.offsetTop - letterListHeight - 110; // Compensa l'altezza della barra delle lettere
                     const sectionBottom = sectionTop + section.offsetHeight; // Calcola il fondo della sezione
 
                     // Se lo scroll è dentro questa sezione, selezionala
@@ -320,14 +321,15 @@
                 event.preventDefault();
                 isScrolling = true; // Imposta il flag per evitare lo scroll multiplo
 
-                const headerHeight = header.offsetHeight;
+                const headerHeight = 100;
                 const targetId = event.currentTarget.getAttribute('href').substring(1);
                 const targetSection = document.getElementById(targetId);
-                let offset = targetSection.offsetTop - letterListHeight - 10; // Adjust the offset as needed
+                let offset = targetSection.offsetTop - letterListHeight - 100; // Adjust the offset as needed
+                console.log('letterListHeight:', letterListHeight);
                 
                 // Se la barra delle lettere non è ancora fissa, aggiungi l'altezza della barra
                 if (window.scrollY < header.offsetHeight) {
-                    offset -= letterListHeight + 20;
+                    offset -= letterListHeight + 0;
                 }
                 // Assicurati che l'offset non sia negativo
                 offset = Math.max(offset, 0);
