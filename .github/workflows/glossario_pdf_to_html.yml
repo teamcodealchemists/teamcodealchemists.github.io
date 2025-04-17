@@ -34,13 +34,8 @@ jobs:
       - name: Scarica il PDF da un link dinamico
         run: |
           curl -o index.json https://teamcodealchemists.github.io/docs/index.json
-          if jq -e '.glossario[0].link' index.json > /dev/null; then
-            PDF_URL=$(jq -r '.glossario[0].link' index.json)
-            curl -o glossario.pdf "$PDF_URL"
-          else
-            echo "Error: Unable to find the PDF URL in index.json" >&2
-            exit 1
-          fi
+          PDF_URL=$(jq -r '.glossario[0].link' index.json)
+          curl -o glossario.pdf "$PDF_URL"
 
       # Passaggio 5: Estrai il testo dal PDF
       - name: Estrai il testo dal PDF
