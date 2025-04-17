@@ -65,7 +65,8 @@ def format_name(name):
         "AdR": "Analisi dei Requisiti",
         "PdQ": "Piano di Qualifica",
         "NdP": "Norme di Progetto",
-        "Gls": "Glossario"
+        "Gls": "Glossario",
+        "signed": "Firmato"
     }
     
     # Esegui le sostituzioni per le sigle
