@@ -129,7 +129,7 @@ def save_output(output_path, content):
 
 def main():
     # URL del file JSON
-    json_url = "https://teamcodealchemists.github.io/docs/index.json"  # Sostituisci con l'URL corretto
+    json_url = "https://teamcodealchemists.github.io/docs/index.json"  
 
     # Percorsi dei file
     template_path = "Assets/templates/template_index.html"
