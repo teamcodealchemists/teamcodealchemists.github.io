@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/SCRUM-88-Automazione-lettura-file-da-Pages #TODO: Rimuovere alla fine della feature
+  workflow_dispatch:
 
 jobs:
   update-links:
