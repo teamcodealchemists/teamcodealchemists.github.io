@@ -1,0 +1,83 @@
+{
+    "": [],
+    "candidatura": [
+        {
+            "name": "Valutazione dei Capitolati_1.0.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/Valutazione dei Capitolati_1.0.0.pdf"
+        },
+        {
+            "name": "Lettera di Presentazione Candidatura.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/Lettera di Presentazione Candidatura.pdf"
+        },
+        {
+            "name": "Dichiarazione Impegni.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/Dichiarazione Impegni.pdf"
+        }
+    ],
+    "candidatura/verbali": [],
+    "candidatura/verbali/verbali_interni": [
+        {
+            "name": "2025-03-18_VI_1.0.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/verbali/verbali_interni/2025-03-18_VI_1.0.0.pdf"
+        },
+        {
+            "name": "2025-03-10_VI_1.0.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/verbali/verbali_interni/2025-03-10_VI_1.0.0.pdf"
+        },
+        {
+            "name": "2025-03-06_VI_1.0.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/verbali/verbali_interni/2025-03-06_VI_1.0.0.pdf"
+        }
+    ],
+    "candidatura/verbali/verbali_esterni": [
+        {
+            "name": "2025-03-17_VE_2.0.0_signed.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/verbali/verbali_esterni/2025-03-17_VE_2.0.0_signed.pdf"
+        },
+        {
+            "name": "2025-03-13_VE_2.0.0_signed.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/verbali/verbali_esterni/2025-03-13_VE_2.0.0_signed.pdf"
+        },
+        {
+            "name": "2025-03-14_VE_2.0.0_signed.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/candidatura/verbali/verbali_esterni/2025-03-14_VE_2.0.0_signed.pdf"
+        }
+    ],
+    "glossario": [
+        {
+            "name": "Gls_0.2.1.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/glossario/Gls_0.2.1.pdf"
+        }
+    ],
+    "rtb": [
+        {
+            "name": "NdP_0.1.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/rtb/NdP_0.1.0.pdf"
+        },
+        {
+            "name": "AdR_0.1.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/rtb/AdR_0.1.0.pdf"
+        }
+    ],
+    "rtb/verbali": [],
+    "rtb/verbali/verbali_interni": [
+        {
+            "name": "2025-04-15_VI_1.0.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/rtb/verbali/verbali_interni/2025-04-15_VI_1.0.0.pdf"
+        },
+        {
+            "name": "2025-03-28_VI_1.0.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/rtb/verbali/verbali_interni/2025-03-28_VI_1.0.0.pdf"
+        },
+        {
+            "name": "2025-04-11_VI_1.1.0.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/rtb/verbali/verbali_interni/2025-04-11_VI_1.1.0.pdf"
+        }
+    ],
+    "rtb/verbali/verbali_esterni": [
+        {
+            "name": "2025-04-04_VE_3.0.0_signed.pdf",
+            "link": "https://teamcodealchemists.github.io/docs/rtb/verbali/verbali_esterni/2025-04-04_VE_3.0.0_signed.pdf"
+        }
+    ]
+}
