@@ -17,8 +17,6 @@
     --card-background: #ffffff;
     --card-shadow: rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
-    --primary-background: #41a3ef;
-    --secondary-background: #7c81ff;
 }
 /*linear-gradient(135deg, #2a7ae2, #6a0dad); colore sfumatura precendente*/
 
@@ -27,6 +25,7 @@ html {
     font-family: "Josefin Sans", sans-serif;
     color: var(--text-color);
     scroll-behavior: smooth;
+    scroll-padding-top: 4.5em;
 }
 
 body {
@@ -35,7 +34,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    margin-top : 70px;
+    margin-top : 48px;
 }
 
 main {
@@ -48,13 +47,15 @@ main {
 .header_container {
     background: var(--header-background);
     color: var(--header-text);
-    padding: 15px;
+    padding: 0 2rem;
+    justify-content: space-between;
     display: flex;
     align-items: center;
     position: fixed; 
     top: 0;  
     left: 0;
-    width: 100%;  
+    width: 100%;
+    height : 4rem;
     z-index: 1000;  
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* justify-content: center; */
@@ -66,32 +67,62 @@ main {
     font-size: 1.5em;
     font-weight: bold;
     display: flex;
+    padding-right: 20px; 
     align-items: center;
 }
 
 .navbar-brand img {
-    margin-right: 5px;
+    margin-right: 0.5em;
     border-radius:50%;
-    width: 40px;
-    height: 40px;
+    width: 2em;
+    height: 2em;
 }
 
-.github-button {
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem; 
+}
+
+.github-link, .documentazione, .aglossary{
+    text-decoration: none;
     margin-left: auto;
     display: flex;
     align-items: center;
 }
-
-.github-icon {
-    font-size: 40px;  
+.github-icon{
+    font-size: 2.5em;  
+    color: #000000; 
+    transition: color 0.3s ease;
+}
+.glossary-icon, .Documentazione-icon{
+    font-size: 1.8em;  
     color: #000000; 
     transition: color 0.3s ease;
 }
 
-.github-icon:hover {
+.github-icon:hover , .glossary-icon:hover, .Documentazione-icon:hover{
     color: #ffffff;
 }
+.github-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-right: 20px;
+}
 
+.github-btn:hover {
+    background-color: var(--secondary-color);
+}
 /* Logo Container */
 #logo_container {
     position: relative;
@@ -99,7 +130,7 @@ main {
     background-size: cover; 
     background-position: center; 
     width: 100%;
-    height: 500px; 
+    height: 100vh; /*21.875em*/
     overflow: hidden; 
     transition: all 0.5s ease-in-out;
 }
@@ -134,7 +165,7 @@ main {
 }
 
 .titolocentrato {
-    top: 45%;
+    top: 40%;
     font-size: 4em;
 }
 
@@ -223,7 +254,7 @@ main {
 }
 
 /*Member*/
-.presentazione h2, h2, h1 {
+.presentazione h2,h2{
     text-align: center;
     margin: 20px 0;
     color: var(--primary-color);
@@ -274,8 +305,7 @@ main {
     scrollbar-width: none;  
     transition: transform 0.5s ease-in-out;
     z-index: 1;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    
 }
 
 .member-container::-webkit-scrollbar {
@@ -468,71 +498,81 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    background-color: var(--background-color);
-    padding: 10px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color:var(--background-color);
+    padding: 1.325em 0; 
+    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.1); 
     transition: top 0.3s ease;
+}
+
+.letter-list a:hover, .letter-list a.selected {
+    background-color: var(--secondary-background); 
+}
+
+
+.titoloGlossario {
+    padding-top: 4em; 
+    text-align: center;
 }
 
 .letter-list.fixed {
     position: fixed;
-    top: 0;
+    top: 4em; 
     z-index: 1000;
 }
 
 .letter-list a {
     display: inline-block;
-    margin: 4px;
-    padding: 10px 15px;
+    margin: 0.25em; 
+    padding: 0.625em 0.9375em; 
     text-decoration: none;
-    color: white;
-    background-color: var(--primary-background); /* Colore di sfondo iniziale */
-    border-radius: 5px;
-    transition: background-color 0.3s ease; /* Transizione per il colore di sfondo */
+    color: black;
+    background-color: var(--primary-background);
+    border-radius: 0.3125em; 
+    transition: background-color 0.3s ease;
 }
 
 .letter-list a:hover, .letter-list a.selected {
-    background-color: var(--secondary-background); /* Colore di sfondo al passaggio del mouse */
+    background-color: var(--secondary-background);
 }
 
-.letter-sections{
-    margin-top:60px;
+.letter-sections {
+    margin-top: 3.75em; 
     margin-left: 10%;
     margin-right: 10%;
 }
 
 .letter-section {
-    padding: 20px; /* Aggiungi un padding a sinistra per allineare le lettere */
-    min-height: 100px;
+    padding: 1em; 
+    min-height: 6.25em;
+    scroll-margin-top: 80em;
 }
 
 .letter-section h2 {
     text-align: left;
-    font-size: 2em; /* Dimensione del carattere per le lettere */
-    margin-bottom: 20px; /* Spazio sotto le lettere */
-    margin-top: -20px;
-    padding-left: 10%; /* Aggiungi un padding a sinistra per allineare le lettere */
+    font-size: 2em;
+    margin-bottom: 1.25em; 
+    margin-top: -1.25em;
+    padding-left: 10%;
 }
 
-.letter-section .definizione{
-    font-size: 1.2em; /* Dimensione del carattere per il contenuto */
+.letter-section .definizione {
+    font-size: 1.2em;
     margin-left: 20%;
     margin-bottom: 5%;
     margin-top: 1%;
 }
 
-.letter-section p b, .parola{
+.letter-section p b, .parola {
     margin-left: 15%;
     font-size: 1.5em;
 }
 
-.letter-section hr{
-    margin: 20px 0;
+.letter-section hr {
+    margin: 1.25em 0; 
     border: 1px solid;
     border-image: linear-gradient(135deg, var(--primary-background), var(--secondary-background)) 1;
     margin-left: 10%;
 }
-
 /* Footer */
 footer {
     background: var(--footer-background);
