@@ -29,9 +29,12 @@ jobs:
       - name: Installa pdftotext
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
 
-      # Passaggio 4: Scarica il PDF da un link
-      - name: Scarica il PDF da un link
-        run: curl -o glossario.pdf https://teamcodealchemists.github.io/docs/glossario/glossario.pdf
+      # Passaggio 4: Scarica il PDF da un link dinamico
+      - name: Scarica il PDF da un link dinamico
+        run: |
+          curl -o index.json https://teamcodealchemists.github.io/docs/index.json
+          PDF_URL=$(jq -r '.glossario[0].link' index.json)
+          curl -o glossario.pdf "$PDF_URL"
 
       # Passaggio 5: Estrai il testo dal PDF
       - name: Estrai il testo dal PDF
