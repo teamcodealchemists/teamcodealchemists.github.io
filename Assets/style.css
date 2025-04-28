@@ -17,6 +17,8 @@
     --card-background: #ffffff;
     --card-shadow: rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
+    --primary-background: #41a3ef;
+    --secondary-background: #7c81ff;
 }
 /*linear-gradient(135deg, #2a7ae2, #6a0dad); colore sfumatura precendente*/
 
@@ -84,7 +86,7 @@ main {
     gap: 2rem; 
 }
 
-.github-link, .documentazione, .aglossary{
+.github-link, .documentazione, .aglossary, .ahome{
     text-decoration: none;
     margin-left: auto;
     display: flex;
@@ -95,13 +97,13 @@ main {
     color: #000000; 
     transition: color 0.3s ease;
 }
-.glossary-icon, .Documentazione-icon{
+.glossary-icon, .Documentazione-icon, .home-icon{
     font-size: 1.8em;  
     color: #000000; 
     transition: color 0.3s ease;
 }
 
-.github-icon:hover , .glossary-icon:hover, .Documentazione-icon:hover{
+.github-icon:hover , .glossary-icon:hover, .Documentazione-icon:hover, .home-icon:hover{
     color: #ffffff;
 }
 .github-btn {
@@ -525,7 +527,7 @@ main {
     margin: 0.25em; 
     padding: 0.625em 0.9375em; 
     text-decoration: none;
-    color: black;
+    color: white;
     background-color: var(--primary-background);
     border-radius: 0.3125em; 
     transition: background-color 0.3s ease;
