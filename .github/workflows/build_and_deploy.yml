@@ -53,6 +53,7 @@ jobs:
           mkdir -p build
           mv index.html build/
           mv glossario.html build/
+          mv Assets/* build/
 
       - name: Upload Artifact for Pages
         uses: actions/upload-pages-artifact@v3
