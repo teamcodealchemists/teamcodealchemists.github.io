@@ -1,9 +1,6 @@
 name: Dynamic Documentation Links
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:

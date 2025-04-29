@@ -2,20 +2,17 @@ import os
 
 # glossario_convert.py
 
-def convert_glossario_to_html(txt_file, html_template_file, output_html_file):
+def convert_glossario_to_html(txt_file):
     try:
         # Leggi il contenuto del file di testo
         with open(txt_file, 'r', encoding='utf-8') as txt:
             glossario_content = txt.read()
 
-        # Leggi il template HTML
-        with open(html_template_file, 'r', encoding='utf-8') as html_template:
-            html_content = html_template.read()
+        # Converte il contenuto in HTML
+        html_content = generate_html(glossario_content)
 
-        # Sostituisci il segnaposto {{contenuto}} con il contenuto del glossario
-        html_content = html_content.replace('{{glossario}}', convert_txt_to_html(glossario_content))
-
-        # Scrivi il risultato in un nuovo file HTML
+        # Scrivi il risultato nello stesso file con estensione .html
+        output_html_file = os.path.splitext(txt_file)[0] + ".html"
         with open(output_html_file, 'w', encoding='utf-8') as output_html:
             output_html.write(html_content)
 
@@ -27,11 +24,9 @@ def convert_glossario_to_html(txt_file, html_template_file, output_html_file):
         print(f"Si è verificato un errore: {e}")
 
 
-def convert_txt_to_html(txt_content):
+def generate_html(txt_content):
     # Crea un dizionario per organizzare le definizioni per lettera
-    glossario = {}
-    for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        glossario[letter] = []
+    glossario = {letter: [] for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}
 
     # Flag per identificare la sezione del glossario
     in_glossary_section = False
@@ -50,7 +45,7 @@ def convert_txt_to_html(txt_content):
             continue
 
         # Ignora righe vuote o non pertinenti
-        if not line or line.startswith("Pagina") or line.startswith("Indice") or line.startswith("Registro"):
+        if not line or line.startswith(("Pagina", "Indice", "Registro")):
             continue
 
         # Identifica le definizioni (formato "• Term: Definizione")
@@ -61,37 +56,44 @@ def convert_txt_to_html(txt_content):
                 definition = parts[1].strip()
                 letter = term[0].upper()
                 if letter in glossario:
-                    glossario[letter].append(f"<b class='parola'>{term}:</b> <p class='definizione'> {definition} </p>")
-        elif not line or not line.startswith("Code Alchemists") and not len(line) < 2:
+                    glossario[letter].append(f"<b class='parola'>{term}:</b> <p class='definizione'>{definition}</p>")
+        elif glossario and any(glossario[letter] for letter in glossario):
             # Aggiunge righe successive come parte della descrizione
-            if glossario and any(glossario[letter] for letter in glossario):
-                last_letter = term[0].upper()
-                if last_letter in glossario and glossario[last_letter]:
-                    glossario[last_letter][-1] = glossario[last_letter][-1].rstrip('</p>') + f" {line}</p>"
+            last_letter = term[0].upper()
+            if last_letter in glossario and glossario[last_letter]:
+                glossario[last_letter][-1] = glossario[last_letter][-1].rstrip('</p>') + f" {line}</p>"
 
     # Genera l'HTML
-    html_output = ""
+    html_output = "<!DOCTYPE html>\n<html lang='it'>\n<head>\n"
+    html_output += "    <meta charset='UTF-8'>\n"
+    html_output += "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n"
+    html_output += "    <title>Glossario</title>\n"
+    html_output += "    <style>\n"
+    html_output += "        .letter-section { margin-bottom: 20px; }\n"
+    html_output += "        .parola { font-weight: bold; }\n"
+    html_output += "        .definizione { margin-left: 10px; display: inline; }\n"
+    html_output += "    </style>\n"
+    html_output += "</head>\n<body>\n"
+    html_output += "    <h1>Glossario</h1>\n"
+
     for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
         html_output += f'<div id="letter-{letter}" class="letter-section">\n'
         html_output += f'    <h2>{letter}</h2>\n'
         if glossario[letter]:
             for definition in glossario[letter]:
-                html_output += f'    <div>\n'
-                html_output += f'        {definition}\n'
-                html_output += f'    </div>\n'
+                html_output += f'    <div>{definition}</div>\n'
         else:
-            html_output += f'    <div>\n'
-            html_output += f'        <b class="parola">Nessuna definizione disponibile.</b>\n'
-            html_output += f'    </div>\n'
+            html_output += f'    <div><b class="parola">Nessuna definizione disponibile.</b></div>\n'
         html_output += f'    <hr>\n'
         html_output += f'</div>\n'
 
+    html_output += "</body>\n</html>\n"
+
     return html_output
 
-# Specifica i file di input e output
+
+# Specifica il file di input
 txt_file = 'glossario.txt'
-html_template_file = 'Assets/templates/template_glossario.html'
-output_html_file = 'glossario.html'
 
 # Esegui la conversione
-convert_glossario_to_html(txt_file, html_template_file, output_html_file)
+convert_glossario_to_html(txt_file)

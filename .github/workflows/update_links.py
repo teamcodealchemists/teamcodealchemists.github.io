@@ -1,7 +1,6 @@
 import json
 import requests
 import os
-import re
 
 
 def download_json(url):
@@ -16,48 +15,11 @@ def download_json(url):
         print(f"Errore durante il download del JSON: {e}")
         return {}
 
-def load_template(template_path):
-    """
-    Carica il contenuto del file template_index.html.
-    """
-    if not os.path.exists(template_path):
-        print(f"Il file template {template_path} non esiste.")
-        return ""
-    with open(template_path, 'r', encoding='utf-8') as file:
-        return file.read()
-
-def get_json_value(json_data, path):
-    """
-    Ottiene un valore da un dizionario JSON seguendo un percorso specifico.
-    Il percorso è definito come una stringa, ad esempio: "glossario[0].link".
-    """
-    keys = path.split(".")
-    value = json_data
-    try:
-        for key in keys:
-            if "[" in key and "]" in key:  # Gestisce gli indici degli array
-                array_key, index = key[:-1].split("[")
-                value = value[array_key][int(index)]
-            else:
-                value = value[key]
-        return value
-    except (KeyError, IndexError, TypeError):
-        return None
-
-def find_node_by_name(data_list, keyword):
-    """
-    Cerca un elemento in una lista di dizionari in cui il campo 'name' contiene una parola chiave.
-    """
-    for item in data_list:
-        if "name" in item and keyword in item["name"]:
-            return item
-    return None
 
 def format_name(name):
     """
     Rende il nome più leggibile rimuovendo caratteri speciali, formattandolo e sostituendo sigle con descrizioni.
     """
-    # Dizionario di sostituzioni per le sigle
     replacements = {
         "VI": "Verbale Interno",
         "VE": "Verbale Esterno",
@@ -66,31 +28,32 @@ def format_name(name):
         "PdQ": "Piano di Qualifica",
         "NdP": "Norme di Progetto",
         "Gls": "Glossario",
+        "DdB": "Diario di Bordo",
         "signed": "Firmato"
     }
-    
-    # Esegui le sostituzioni per le sigle
     for sigla, descrizione in replacements.items():
         name = name.replace(sigla, descrizione)
-    
-    # Rimuovi underscore, sostituisci con spazi e formatta
     return name.replace("_", " ").replace(".pdf", " ").title()
 
-def resolve_path_and_name(json_data, path_with_name):
+
+def resolve_files_or_folder(path):
     """
-    Risolve un percorso del tipo X/Y/Z/NOME.
-    Cerca il nodo X/Y/Z e poi cerca un elemento con 'name' che contiene NOME.
+    Risolve un percorso che può essere una cartella o un file.
+    Se è una cartella, restituisce tutti i file al suo interno.
+    Se è un file, restituisce solo quel file.
     """
-    *path_parts, name_keyword = path_with_name.split("/")
-    path = "/".join(path_parts)
-    node = get_json_value(json_data, path.replace("/", "."))
-    if isinstance(node, list):
-        found_node = find_node_by_name(node, name_keyword)
-        if found_node:
-            formatted_name = format_name(found_node["name"])
-            return f'<a href="{found_node["link"]}" target="_blank">{formatted_name}</a>'
-    # Se non trovato, restituisci un <a> senza link
-    return f'<a>{path_with_name}</a>'
+    if os.path.isdir(path):
+        files = [
+            {"name": file, "link": os.path.join(path, file)}
+            for file in os.listdir(path)
+            if os.path.isfile(os.path.join(path, file))
+        ]
+    elif os.path.isfile(path):
+        files = [{"name": os.path.basename(path), "link": path}]
+    else:
+        files = []
+    return files
+
 
 def resolve_verbali(json_data, path):
     """
@@ -99,25 +62,74 @@ def resolve_verbali(json_data, path):
     """
     node = get_json_value(json_data, path)
     if isinstance(node, list):
-        # Ordina i nodi per nome
-        sorted_node = sorted(node, key=lambda x: x["name"], reverse=True)
+        all_files = []
+        for item in node:
+            resolved_files = resolve_files_or_folder(item["path"])
+            all_files.extend(resolved_files)
+
+        sorted_files = sorted(all_files, key=lambda x: x["name"], reverse=True)
         links = [
-            f'<a href="{item["link"]}" target="_blank">{format_name(item["name"])}</a>\n'
-            for item in sorted_node
+            f'<li><a href="{file["link"]}" target="_blank">{format_name(file["name"])}</a></li>'
+            for file in sorted_files
         ]
         return "".join(links)
-    # Se non trovato, restituisci un <a> senza link
-    return f'<a>{path}</a>'
+    return f"<li>{path}</li>"
 
-def replace_variables(template, variables):
+
+def get_json_value(json_data, path):
     """
-    Sostituisce le variabili nel template con i valori dal dizionario.
-    Se una variabile non è presente, la lascia invariata.
+    Ottiene un valore da un dizionario JSON seguendo un percorso specifico.
     """
-    for key, value in variables.items():
-        placeholder = f"{{{{{key}}}}}"  # Formato delle variabili nel template: {{qualcosa}}
-        template = template.replace(placeholder, str(value))
-    return template
+    keys = path.split(".")
+    value = json_data
+    try:
+        for key in keys:
+            if "[" in key and "]" in key:
+                array_key, index = key[:-1].split("[")
+                value = value[array_key][int(index)]
+            else:
+                value = value[key]
+        return value
+    except (KeyError, IndexError, TypeError):
+        return None
+
+
+def generate_html(json_data):
+    """
+    Genera il contenuto HTML dinamicamente senza utilizzare un template esterno.
+    """
+    html = """
+    <!DOCTYPE html>
+    <html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Documenti</title>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+            h1 { color: #333; }
+            ul { list-style-type: none; padding: 0; }
+            li { margin: 5px 0; }
+            a { text-decoration: none; color: #007BFF; }
+            a:hover { text-decoration: underline; }
+        </style>
+    </head>
+    <body>
+        <h1>Documenti</h1>
+        <ul>
+    """
+
+    # Aggiungi i link dinamici per i verbali
+    verbali_links = resolve_verbali(json_data, "verbali")
+    html += verbali_links
+
+    html += """
+        </ul>
+    </body>
+    </html>
+    """
+    return html
+
 
 def save_output(output_path, content):
     """
@@ -127,34 +139,23 @@ def save_output(output_path, content):
         file.write(content)
     print(f"File generato: {output_path}")
 
+
 def main():
     # URL del file JSON
-    json_url = "https://teamcodealchemists.github.io/docs/index.json"  
+    json_url = "https://teamcodealchemists.github.io/docs/index.json"
 
-    # Percorsi dei file
-    template_path = "Assets/templates/template_index.html"
+    # Percorso del file di output
     output_path = "index.html"
 
     # Scarica il JSON
     json_data = download_json(json_url)
 
-    # Genera dinamicamente le variabili
-    variables = {}
-
-    # Carica il template
-    template = load_template(template_path)
-
-    # Sostituisci le variabili
-    for placeholder in re.findall(r"\{\{(.*?)\}\}", template):
-        if "verbali" in placeholder:  # Gestione speciale per variabili che contengono 'verbali'
-            variables[placeholder] = resolve_verbali(json_data, placeholder)
-        elif "/" in placeholder:  # Gestione speciale per percorsi del tipo X/Y/Z/NOME
-            variables[placeholder] = resolve_path_and_name(json_data, placeholder)
-
-    output_content = replace_variables(template, variables)
+    # Genera il contenuto HTML
+    html_content = generate_html(json_data)
 
     # Salva il file generato
-    save_output(output_path, output_content)
+    save_output(output_path, html_content)
+
 
 if __name__ == "__main__":
     main()

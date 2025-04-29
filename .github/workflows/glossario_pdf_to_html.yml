@@ -1,11 +1,6 @@
 name: Converti Glossario PDF a HTML
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'glossario.html'
   workflow_dispatch:
 
 permissions:

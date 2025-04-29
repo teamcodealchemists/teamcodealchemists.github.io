@@ -1,0 +1,56 @@
+name: Compile Files and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - develop #TODO: Remove this line when deploying to production
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      
+      - name: Install pdftotext
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Update HTML links and create index file for Deploy
+        run: python .github/workflows/update_links.py
+
+      - name: Download the Glossary PDF from a dynamic link
+        run: |
+          curl -o index.json https://teamcodealchemists.github.io/docs/index.json
+          PDF_URL=$(jq -r '.glossario[0].link' index.json)
+          curl -o glossario.pdf "$PDF_URL"
+
+      - name: Extract text from the PDF
+        run: pdftotext glossario.pdf glossario.txt
+
+      - name: Update HTML links and create glossario file for Deploy
+        run: python .github/workflows/glossario_convert.py
+
+      - name: Prepare files for deployment
+        run: |
+          mkdir -p build
+          mv index.html build/
+          mv glossario.html build/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
