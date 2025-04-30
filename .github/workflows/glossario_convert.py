@@ -68,7 +68,7 @@ def generate_html(txt_content):
                 definition = parts[1].strip()
                 letter = current_term[0].upper()
                 if letter in glossario:
-                    glossario[letter].append(f"<b class='parola'>{current_term}:</b> <p class='definizione'>{definition}</p>")
+                    glossario[letter].append(f"<b class='parola'>{current_term}:</b> <p class='definizione'>   {definition}</p>")
         elif current_term:
             # Aggiunge righe successive come parte della descrizione
             letter = current_term[0].upper()
@@ -79,13 +79,15 @@ def generate_html(txt_content):
     html_output = ""
 
     for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        html_output += f'<h2>{letter}</h2>\n'
+        html_output += f'<div id="letter-{letter}" class="letter-section">\n'
+        html_output += f'    <h2>{letter}</h2>\n'
         if glossario[letter]:
             for definition in glossario[letter]:
                 html_output += f'    <div>\n        {definition}\n    </div>\n'
         else:
-            html_output += f'    <div><b class="parola">Nessuna definizione disponibile.</b></div>\n'
+            html_output += f'    <div>\n        <b class="parola">Nessuna definizione disponibile.</b>\n    </div>\n'
         html_output += f'    <hr>\n'
+        html_output += f'</div>\n'
 
     return html_output
 
