@@ -8,6 +8,10 @@ def convert_glossario_to_html(txt_file):
         with open(txt_file, 'r', encoding='utf-8') as txt:
             glossario_content = txt.read()
 
+        # Stampa il contenuto del file per il debug
+        print("Contenuto del file glossario.txt:")
+        print(glossario_content)
+
         # Converte il contenuto in HTML
         html_content = generate_html(glossario_content)
 
@@ -37,6 +41,7 @@ def generate_html(txt_content):
 
     # Flag per identificare la sezione del glossario
     in_glossary_section = False
+    current_term = None  # Per tracciare il termine corrente
 
     # Processa il contenuto del file di testo
     for line in txt_content.splitlines():
@@ -59,16 +64,16 @@ def generate_html(txt_content):
         if line.startswith("•"):
             parts = line.split(":", 1)
             if len(parts) == 2:
-                term = parts[0].replace("•", "").strip()
+                current_term = parts[0].replace("•", "").strip()
                 definition = parts[1].strip()
-                letter = term[0].upper()
+                letter = current_term[0].upper()
                 if letter in glossario:
-                    glossario[letter].append(f"<b class='parola'>{term}:</b> <p class='definizione'>{definition}</p>")
-        elif glossario and any(glossario[letter] for letter in glossario):
+                    glossario[letter].append(f"<b class='parola'>{current_term}:</b> <p class='definizione'>{definition}</p>")
+        elif current_term:
             # Aggiunge righe successive come parte della descrizione
-            last_letter = term[0].upper()
-            if last_letter in glossario and glossario[last_letter]:
-                glossario[last_letter][-1] = glossario[last_letter][-1].rstrip('</p>') + f" {line}</p>"
+            letter = current_term[0].upper()
+            if letter in glossario and glossario[letter]:
+                glossario[letter][-1] = glossario[letter][-1].rstrip('</p>') + f" {line}</p>"
 
     # Genera l'HTML
     html_output = "<!DOCTYPE html>\n<html lang='it'>\n<head>\n"
