@@ -33,128 +33,89 @@ def format_name(name):
     }
     for sigla, descrizione in replacements.items():
         name = name.replace(sigla, descrizione)
-    return name.replace("_", " ").replace(".pdf", " ").title()
+    return name.replace("_", " ").replace(".pdf", "").title()
 
 
-def resolve_files_or_folder(path):
+def generate_links(json_data, variable_name):
     """
-    Risolve un percorso che può essere una cartella o un file.
-    Se è una cartella, restituisce tutti i file al suo interno.
-    Se è un file, restituisce solo quel file.
+    Genera i link HTML per i file corrispondenti a una variabile.
+    - Cerca tutte le chiavi nel JSON che contengono il nome della variabile.
+    - Se ci sono più file, genera una lista di link.
+    - Se c'è un solo file, genera un link singolo.
     """
-    if os.path.isdir(path):
-        files = [
-            {"name": file, "link": os.path.join(path, file)}
-            for file in os.listdir(path)
-            if os.path.isfile(os.path.join(path, file))
-        ]
-    elif os.path.isfile(path):
-        files = [{"name": os.path.basename(path), "link": path}]
-    else:
-        files = []
-    return files
+    links = []
+
+    # Cerca tutte le chiavi che contengono il nome della variabile
+    for key, link in json_data.items():
+        if variable_name in key:
+            # Estrai il nome del file dalla chiave e formatta il nome
+            file_name = key.split("/")[-1]
+            links.append(
+                f'<li><a href="{link.replace(" ", "%20")}" target="_blank">{format_name(file_name)}</a></li>'
+            )
+
+    if not links:
+        return "<p>Nessun documento disponibile</p>"
+
+    if len(links) == 1:
+        # Rimuovi i tag <li> se c'è un solo link
+        return links[0][4:-5]
+    return f"<ul>{''.join(links)}</ul>"
 
 
-def resolve_verbali(json_data, path):
+def save_output(output_path, replacements):
     """
-    Risolve i nodi per variabili che contengono la parola 'verbali'.
-    Cerca tutti i nodi corrispondenti, li ordina per nome e genera i link HTML.
+    Sostituisce le variabili nel file di output senza modificare il resto.
     """
-    node = get_json_value(json_data, path)
-    if isinstance(node, list):
-        all_files = []
-        for item in node:
-            resolved_files = resolve_files_or_folder(item["path"])
-            all_files.extend(resolved_files)
-
-        sorted_files = sorted(all_files, key=lambda x: x["name"], reverse=True)
-        links = [
-            f'<li><a href="{file["link"]}" target="_blank">{format_name(file["name"])}</a></li>'
-            for file in sorted_files
-        ]
-        return "".join(links)
-    return f"<li>{path}</li>"
-
-
-def get_json_value(json_data, path):
-    """
-    Ottiene un valore da un dizionario JSON seguendo un percorso specifico.
-    """
-    keys = path.split(".")
-    value = json_data
     try:
-        for key in keys:
-            if "[" in key and "]" in key:
-                array_key, index = key[:-1].split("[")
-                value = value[array_key][int(index)]
-            else:
-                value = value[key]
-        return value
-    except (KeyError, IndexError, TypeError):
-        return None
+        if not os.path.exists(output_path):
+            print(f"Errore: Il file {output_path} non esiste.")
+            return
 
+        with open(output_path, 'r', encoding='utf-8') as file:
+            existing_content = file.read()
 
-def generate_html(json_data):
-    """
-    Genera il contenuto HTML dinamicamente senza utilizzare un template esterno.
-    """
-    html = """
-    <!DOCTYPE html>
-    <html lang="it">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Documenti</title>
-        <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
-            h1 { color: #333; }
-            ul { list-style-type: none; padding: 0; }
-            li { margin: 5px 0; }
-            a { text-decoration: none; color: #007BFF; }
-            a:hover { text-decoration: underline; }
-        </style>
-    </head>
-    <body>
-        <h1>Documenti</h1>
-        <ul>
-    """
+        updated_content = existing_content
+        for variable, replacement in replacements.items():
+            updated_content = updated_content.replace(f"{{{{{variable}}}}}", replacement)
 
-    # Aggiungi i link dinamici per i verbali
-    verbali_links = resolve_verbali(json_data, "verbali")
-    html += verbali_links
+        with open(output_path, 'w', encoding='utf-8') as file:
+            file.write(updated_content)
 
-    html += """
-        </ul>
-    </body>
-    </html>
-    """
-    return html
+        print(f"File aggiornato con successo: {output_path}")
 
-
-def save_output(output_path, content):
-    """
-    Salva il contenuto generato in un file index.html.
-    """
-    with open(output_path, 'w', encoding='utf-8') as file:
-        file.write(content)
-    print(f"File generato: {output_path}")
+    except Exception as e:
+        print(f"Errore durante l'aggiornamento del file: {e}")
 
 
 def main():
-    # URL del file JSON
+    # URL del file JSON aggiornato
     json_url = "https://teamcodealchemists.github.io/docs/index.json"
 
     # Percorso del file di output
     output_path = "index.html"
 
-    # Scarica il JSON
+    # Scarica il JSON aggiornato
     json_data = download_json(json_url)
 
-    # Genera il contenuto HTML
-    html_content = generate_html(json_data)
+    # Specifica le variabili e genera i link corrispondenti
+    replacements = {
+        "rtb/AdR": generate_links(json_data, "rtb/AdR"),
+        "rtb/NdP": generate_links(json_data, "rtb/NdP"),
+        "rtb/PdQ": generate_links(json_data, "rtb/PdQ"),
+        "rtb/Gls": generate_links(json_data, "glossario/Gls"),
+        "rtb/verbali/verbali_interni": generate_links(json_data, "rtb/verbali/verbali_interni"),
+        "rtb/verbali/verbali_esterni": generate_links(json_data, "rtb/verbali/verbali_esterni"),
+        "candidatura/verbali/verbali_interni": generate_links(json_data, "candidatura/verbali/verbali_interni"),
+        "candidatura/verbali/verbali_esterni": generate_links(json_data, "candidatura/verbali/verbali_esterni"),
+        "candidatura/Valutazione": generate_links(json_data, "candidatura/Valutazione"),
+        "candidatura/Lettera": generate_links(json_data, "candidatura/Lettera"),
+        "candidatura/Dichiarazione": generate_links(json_data, "candidatura/Dichiarazione"),
+        "presentazioni": generate_links(json_data, "presentazioni"),
+    }
 
-    # Salva il file generato
-    save_output(output_path, html_content)
+    # Salva il file aggiornato sostituendo le variabili
+    save_output(output_path, replacements)
 
 
 if __name__ == "__main__":

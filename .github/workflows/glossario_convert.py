@@ -11,12 +11,19 @@ def convert_glossario_to_html(txt_file):
         # Converte il contenuto in HTML
         html_content = generate_html(glossario_content)
 
-        # Scrivi il risultato nello stesso file con estensione .html
+        # Leggi il file HTML esistente
         output_html_file = os.path.splitext(txt_file)[0] + ".html"
-        with open(output_html_file, 'w', encoding='utf-8') as output_html:
-            output_html.write(html_content)
+        with open(output_html_file, 'r', encoding='utf-8') as output_html:
+            existing_html = output_html.read()
 
-        print(f"File HTML generato con successo: {output_html_file}")
+        # Sostituisci la variabile {{glossario}} con il contenuto generato
+        updated_html = existing_html.replace("{{glossario}}", html_content)
+
+        # Scrivi il risultato nel file HTML
+        with open(output_html_file, 'w', encoding='utf-8') as output_html:
+            output_html.write(updated_html)
+
+        print(f"File HTML aggiornato con successo: {output_html_file}")
 
     except FileNotFoundError as e:
         print(f"Errore: {e}")
