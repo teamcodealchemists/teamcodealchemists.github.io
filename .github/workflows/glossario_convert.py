@@ -75,31 +75,17 @@ def generate_html(txt_content):
             if letter in glossario and glossario[letter]:
                 glossario[letter][-1] = glossario[letter][-1].rstrip('</p>') + f" {line}</p>"
 
-    # Genera l'HTML
-    html_output = "<!DOCTYPE html>\n<html lang='it'>\n<head>\n"
-    html_output += "    <meta charset='UTF-8'>\n"
-    html_output += "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n"
-    html_output += "    <title>Glossario</title>\n"
-    html_output += "    <style>\n"
-    html_output += "        .letter-section { margin-bottom: 20px; }\n"
-    html_output += "        .parola { font-weight: bold; }\n"
-    html_output += "        .definizione { margin-left: 10px; display: inline; }\n"
-    html_output += "    </style>\n"
-    html_output += "</head>\n<body>\n"
-    html_output += "    <h1>Glossario</h1>\n"
+    # Genera solo il contenuto del glossario
+    html_output = ""
 
     for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        html_output += f'<div id="letter-{letter}" class="letter-section">\n'
-        html_output += f'    <h2>{letter}</h2>\n'
+        html_output += f'<h2>{letter}</h2>\n'
         if glossario[letter]:
             for definition in glossario[letter]:
-                html_output += f'    <div>{definition}</div>\n'
+                html_output += f'    <div>\n        {definition}\n    </div>\n'
         else:
             html_output += f'    <div><b class="parola">Nessuna definizione disponibile.</b></div>\n'
         html_output += f'    <hr>\n'
-        html_output += f'</div>\n'
-
-    html_output += "</body>\n</html>\n"
 
     return html_output
 
