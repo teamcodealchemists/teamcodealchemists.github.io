@@ -1,6 +1,8 @@
 import json
 import requests
 import os
+import re
+from datetime import datetime
 
 
 def download_json(url):
@@ -40,19 +42,31 @@ def generate_links(json_data, variable_name):
     """
     Genera i link HTML per i file corrispondenti a una variabile.
     - Cerca tutte le chiavi nel JSON che contengono il nome della variabile.
-    - Se ci sono più file, genera una lista di link.
-    - Se c'è un solo file, genera un link singolo.
+    - Ordina i file in base alla data (AAAA-MM-DD) presente all'inizio del nome.
+    - I file senza data vengono inclusi e ordinati dopo quelli con data.
     """
     links = []
 
     # Cerca tutte le chiavi che contengono il nome della variabile
     for key, link in json_data.items():
         if variable_name in key:
-            # Estrai il nome del file dalla chiave e formatta il nome
+            # Estrai il nome del file dalla chiave
             file_name = key.split("/")[-1]
-            links.append(
-                f'<li><a href="{link.replace(" ", "%20")}" target="_blank">{format_name(file_name)}</a></li>'
-            )
+            # Estrai la data dal nome del file (se presente)
+            match = re.match(r"(\d{4}-\d{2}-\d{2})", file_name)
+            if match:
+                date = match.group(1)
+                # Aggiungi il link con la data per ordinamento
+                links.append((date, f'<li><a href="{link.replace(" ", "%20")}" target="_blank">{format_name(file_name)}</a></li>'))
+            else:
+                # Aggiungi i file senza data con una data fittizia "0000-00-00"
+                links.append(("0000-00-00", f'<li><a href="{link.replace(" ", "%20")}" target="_blank">{format_name(file_name)}</a></li>'))
+
+    # Ordina i link in base alla data (dalla più recente alla meno recente)
+    links.sort(key=lambda x: (x[0] != "0000-00-00", datetime.strptime(x[0], "%Y-%m-%d") if x[0] != "0000-00-00" else datetime.min), reverse=True)
+
+    # Rimuovi la data e crea la lista HTML
+    links = [link[1] for link in links]
 
     if not links:
         return "<p>Nessun documento disponibile</p>"
