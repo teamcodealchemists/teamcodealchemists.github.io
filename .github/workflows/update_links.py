@@ -117,6 +117,7 @@ def main():
         "rtb/AdR": generate_links(json_data, "rtb/AdR"),
         "rtb/NdP": generate_links(json_data, "rtb/NdP"),
         "rtb/PdQ": generate_links(json_data, "rtb/PdQ"),
+        "rtb/PdP": generate_links(json_data, "rtb/PdP"),
         "rtb/Gls": generate_links(json_data, "glossario/Gls"),
         "rtb/verbali/verbali_interni": generate_links(json_data, "rtb/verbali/verbali_interni"),
         "rtb/verbali/verbali_esterni": generate_links(json_data, "rtb/verbali/verbali_esterni"),
