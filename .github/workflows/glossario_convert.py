@@ -65,12 +65,16 @@ def generate_html(txt_content):
             parts = line.split(":", 1)
             if len(parts) == 2:
                 current_term = parts[0].replace("•", "").strip()
-                definition = parts[1].strip()
-                letter = current_term[0].upper()
-                if letter in glossario:
-                    glossario[letter].append(f"<b class='parola'>{current_term}:</b> <p class='definizione'>   {definition}</p>")
+                # Solo se il termine inizia con una lettera
+                if current_term and current_term[0].isalpha():
+                    definition = parts[1].strip()
+                    letter = current_term[0].upper()
+                    if letter in glossario:
+                        glossario[letter].append(f"<b class='parola'>{current_term}:</b> <p class='definizione'>   {definition}</p>")
+                else:
+                    current_term = None  # Non valido, ignora
         elif current_term:
-            # Aggiunge righe successive come parte della descrizione
+            # Aggiunge righe successive come parte della descrizione SOLO se current_term valido
             letter = current_term[0].upper()
             if letter in glossario and glossario[letter]:
                 glossario[letter][-1] = glossario[letter][-1].rstrip('</p>') + f" {line}</p>"
