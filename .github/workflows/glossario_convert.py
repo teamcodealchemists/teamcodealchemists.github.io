@@ -69,6 +69,8 @@ def generate_html(txt_content):
                 # Solo se il termine inizia con una lettera
                 if current_term and current_term[0].isalpha():
                     definition = parts[1].strip()
+                    # Rimuovi eventuale "Code Alchemists X" finale
+                    definition = re.sub(r'(Code Alchemists [A-Z])\s*$', '', definition).strip()
                     letter = current_term[0].upper()
                     if letter in glossario:
                         glossario[letter].append(f"<b class='parola'>{current_term}:</b> <p class='definizione'>   {definition}</p>")
