@@ -70,7 +70,7 @@ def generate_html(txt_content):
                 if current_term and current_term[0].isalpha():
                     definition = parts[1].strip()
                     # Rimuovi eventuale "Code Alchemists X" finale
-                    definition = re.sub(r'(Code Alchemists [A-Z])\s*$', '', definition).strip()
+                    definition = re.sub(r'(Code Alchemists [A-Za-z])\s*$', '', definition).strip()
                     letter = current_term[0].upper()
                     if letter in glossario:
                         glossario[letter].append(f"<b class='parola'>{current_term}:</b> <p class='definizione'>   {definition}</p>")
@@ -84,7 +84,10 @@ def generate_html(txt_content):
             # Altrimenti aggiungi la riga alla definizione precedente
             letter = current_term[0].upper()
             if letter in glossario and glossario[letter]:
-                glossario[letter][-1] = glossario[letter][-1].rstrip('</p>') + f" {line}</p>"
+                # Unisci la riga e rimuovi "Code Alchemists X" finale
+                new_def = glossario[letter][-1].rstrip('</p>') + f" {line}</p>"
+                new_def = re.sub(r'(Code Alchemists [A-Za-z])\s*</p>$', '</p>', new_def).strip()
+                glossario[letter][-1] = new_def
 
     # Genera solo il contenuto del glossario
     html_output = ""
