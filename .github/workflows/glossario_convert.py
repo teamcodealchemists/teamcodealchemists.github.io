@@ -1,4 +1,5 @@
 import os
+import re
 
 # glossario_convert.py
 
@@ -74,7 +75,11 @@ def generate_html(txt_content):
                 else:
                     current_term = None  # Non valido, ignora
         elif current_term:
-            # Aggiunge righe successive come parte della descrizione SOLO se current_term valido
+            # Se la riga sembra un nuovo termine (es: "Code Alchemists B:"), NON aggiungerla alla definizione precedente
+            if re.match(r"^[A-Z][A-Za-z\s\-']{1,30}:", line):
+                current_term = None
+                continue
+            # Altrimenti aggiungi la riga alla definizione precedente
             letter = current_term[0].upper()
             if letter in glossario and glossario[letter]:
                 glossario[letter][-1] = glossario[letter][-1].rstrip('</p>') + f" {line}</p>"
