@@ -52,13 +52,16 @@
             <div class="card" onclick="toggleDropdown(2)"> 
                 <h3>RTB</h3>
                 <div class="dropdown" id="dropdown-2">
-                    <h4>Documenti Interni:</h4>
-                        {{rtb/NdP}}
-                        {{rtb/Gls}}
+                        <a href="https://teamcodealchemists.github.io/docs/rtb/Lettera_Revisione_RTB.pdf" target="_blank" title="Lettera di Presentazione RTB">Lettera di Presentazione RTB</a>
                     <h4>Documenti Esterni:</h4>
                         {{rtb/PdP}}
                         {{rtb/AdR}}
                         {{rtb/PdQ}}
+                    <h4>Proof of Concept:</h4>
+                        <a href="https://github.com/teamcodealchemists/PoC/archive/refs/tags/1.0.0.zip" target="_blank" title="Scarica Proof of Concept (zip)">Scarica Proof of Concept (v1.0.0)</a>
+                    <h4>Documenti Interni:</h4>
+                        {{rtb/NdP}}
+                        {{rtb/Gls}}
                     <h4>Verbali Interni:</h4>
                         {{rtb/verbali/verbali_interni}}
                     <h4>Verbali Esterni:</h4>
@@ -83,7 +86,10 @@
             <div class="card" onclick="toggleDropdown(4)">
                 <h3>Diapositive</h3>
                 <div class="dropdown" id="dropdown-4">
-                    {{presentazioni}}
+                    <h4>RTB:</h4>
+                        {{rtb}}
+                    <h4>Diario di Bordo:</h4>
+                        {{presentazioni}}
                 </div>
             </div>
         </div>
