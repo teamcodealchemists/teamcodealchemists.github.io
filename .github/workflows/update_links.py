@@ -53,6 +53,8 @@ def generate_links(json_data, variable_name):
             # Estrai il nome del file dalla chiave
             file_name = key.split("/")[-1]
 
+            print(f"Processing file: {file_name} (key: {key}, link: {link})")
+
             # Filtra per i file che terminano con _DdB per la variabile "presentazioni"
             if variable_name == "presentazioni" and not file_name.replace(".pdf", "").endswith("_DdB"):
                 continue
