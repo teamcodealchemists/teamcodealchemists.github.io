@@ -38,7 +38,7 @@ jobs:
       - name: Download the Glossary PDF from a dynamic link
         run: |
           curl -o index.json https://teamcodealchemists.github.io/docs/index.json
-          PDF_URL=$(jq -r 'to_entries[] | select(.key | test("glossario/Gls")) | .value' index.json)
+          PDF_URL=$(jq -r 'to_entries[] | select(.key | test("^glossario/Gls")) | .value' index.json)
           curl -L -o glossario.pdf "$PDF_URL"
 
       - name: Extract text from the PDF
