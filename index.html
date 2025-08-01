@@ -49,6 +49,26 @@
             <h2 class="titolo" id="titolo">Documentazione</h2>
         </div>
         <div class="card-container">
+
+            <!-- PB -->
+             <div class="card" onclick="toggleDropdown(2)"> 
+                <h3>PB</h3>
+                <div class="dropdown" id="dropdown-2">
+                    <h4>Documenti Esterni:</h4>
+                        {{pb/PdP}}
+                        {{pb/AdR}}
+                        {{pb/PdQ}}
+                    <h4>Documenti Interni:</h4>
+                        {{pb/NdP}}
+                        {{pb/Gls}}
+                    <h4>Verbali Interni:</h4>
+                        {{pb/verbali/verbali_interni}}
+                    <h4>Verbali Esterni:</h4>
+                        {{pb/verbali/verbali_esterni}}
+                </div>
+            </div>
+
+            <!-- RTB -->
             <div class="card" onclick="toggleDropdown(2)"> 
                 <h3>RTB</h3>
                 <div class="dropdown" id="dropdown-2">
@@ -88,6 +108,7 @@
                 <div class="dropdown" id="dropdown-4">
                     <h4>RTB:</h4> <!-- Presentazioni RTB-->
                         <a href="https://teamcodealchemists.github.io/docs/presentazioni/2025-07-21_Presentazione Tecnologie_RTB.pdf" title="Presentazione Tecnologie">Presentazione Tecnologie</a>
+                        <a href="https://teamcodealchemists.github.io/docs/presentazioni/2025-07-31_Presentazione_RTB.pdf" title="Presentazione RTB">Presentazione RTB</a>
                     <h4>Diario di Bordo:</h4>
                         {{presentazioni}}
                 </div>

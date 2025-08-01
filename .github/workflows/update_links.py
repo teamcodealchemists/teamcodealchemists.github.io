@@ -119,11 +119,18 @@ def main():
 
     # Specifica le variabili e genera i link corrispondenti
     replacements = {
+        "pb/AdR": generate_links(json_data, "pb/AdR"),
+        "pb/NdP": generate_links(json_data, "pb/NdP"),
+        "pb/PdQ": generate_links(json_data, "pb/PdQ"),
+        "pb/PdP": generate_links(json_data, "pb/PdP"),
+        "pb/Gls": generate_links(json_data, "glossario/Gls"),
+        "pb/verbali/verbali_interni": generate_links(json_data, "pb/verbali/verbali_interni"),
+        "pb/verbali/verbali_esterni": generate_links(json_data, "pb/verbali/verbali_esterni"),
         "rtb/AdR": generate_links(json_data, "rtb/AdR"),
         "rtb/NdP": generate_links(json_data, "rtb/NdP"),
         "rtb/PdQ": generate_links(json_data, "rtb/PdQ"),
         "rtb/PdP": generate_links(json_data, "rtb/PdP"),
-        "rtb/Gls": generate_links(json_data, "glossario/Gls"),
+        "rtb/Gls": generate_links(json_data, "rtb/Gls"),
         "rtb/verbali/verbali_interni": generate_links(json_data, "rtb/verbali/verbali_interni"),
         "rtb/verbali/verbali_esterni": generate_links(json_data, "rtb/verbali/verbali_esterni"),
         "candidatura/verbali/verbali_interni": generate_links(json_data, "candidatura/verbali/verbali_interni"),
