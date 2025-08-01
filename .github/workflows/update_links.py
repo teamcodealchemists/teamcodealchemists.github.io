@@ -49,7 +49,7 @@ def generate_links(json_data, variable_name):
 
     # Cerca tutte le chiavi che contengono il nome della variabile
     for key, link in json_data.items():
-        if variable_name in key and key.startswith(variable_name + "/"):
+        if key == variable_name or key.startswith(variable_name + "/"):
             # Estrai il nome del file dalla chiave
             file_name = key.split("/")[-1]
 
