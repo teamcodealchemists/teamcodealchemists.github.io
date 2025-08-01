@@ -130,7 +130,7 @@ def main():
         "rtb/NdP": generate_links(json_data, "rtb/NdP"),
         "rtb/PdQ": generate_links(json_data, "rtb/PdQ"),
         "rtb/PdP": generate_links(json_data, "rtb/PdP"),
-        "rtb/Gls": generate_links(json_data, "rtb/Gls"),
+        "rtb/Gls": generate_links(json_data, "rtb/glossario/Gls"),
         "rtb/verbali/verbali_interni": generate_links(json_data, "rtb/verbali/verbali_interni"),
         "rtb/verbali/verbali_esterni": generate_links(json_data, "rtb/verbali/verbali_esterni"),
         "candidatura/verbali/verbali_interni": generate_links(json_data, "candidatura/verbali/verbali_interni"),
