@@ -29,7 +29,7 @@ def format_name(name):
         "AdR": "Analisi dei Requisiti",
         "PdQ": "Piano di Qualifica",
         "NdP": "Norme di Progetto",
-        "TB": "TestBook",
+        "TB": "Test Book",
         "MU": "Manuale Utente",
         "Gls": "Glossario",
         "DdB": "Diario di Bordo",
