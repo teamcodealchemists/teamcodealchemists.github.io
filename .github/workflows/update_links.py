@@ -29,6 +29,8 @@ def format_name(name):
         "AdR": "Analisi dei Requisiti",
         "PdQ": "Piano di Qualifica",
         "NdP": "Norme di Progetto",
+        "TB": "Test Book",
+        "MU": "Manuale Utente",
         "Gls": "Glossario",
         "DdB": "Diario di Bordo",
         "signed": "Firmato"
@@ -126,6 +128,8 @@ def main():
         "pb/NdP": generate_links(json_data, "pb/NdP"),
         "pb/PdQ": generate_links(json_data, "pb/PdQ"),
         "pb/PdP": generate_links(json_data, "pb/PdP"),
+        "pb/TB": generate_links(json_data, "pb/TB"),
+        "pb/MU": generate_links(json_data, "pb/MU"),
         "pb/Gls": generate_links(json_data, "glossario/Gls"),
         "pb/verbali/verbali_interni": generate_links(json_data, "pb/verbali/verbali_interni"),
         "pb/verbali/verbali_esterni": generate_links(json_data, "pb/verbali/verbali_esterni"),
